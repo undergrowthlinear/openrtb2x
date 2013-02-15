@@ -9,8 +9,8 @@
   <packaging>pom</packaging>
 
   <scm>
-    <url>http://code.google.com/p/openrtb</url>
-    <connection>scm:hg:https://openrtb.googlecode.com/hg</connection>
+    <url>scm:git:git@github.com:openrtb/openrtb2x.git</url>
+    <connection>scm:git:git@github.com:openrtb/openrtb2x.git</connection>
   </scm>
 
   <modules>
@@ -121,6 +121,17 @@
 	<version>1.6.1</version>
       </dependency>
 
+	<dependency>
+	  <groupId>org.apache.avro</groupId>
+	  <artifactId>avro</artifactId>
+	  <version>1.5.1</version>
+	</dependency>
+	<dependency>
+	  <groupId>org.apache.avro</groupId>
+	  <artifactId>avro-ipc</artifactId>
+	  <version>1.5.1</version>
+	</dependency>
+
     </dependencies>
   </dependencyManagement>
 
@@ -136,6 +147,31 @@
           <encoding>UTF-8</encoding>
         </configuration>
       </plugin>
+	<plugin>
+	  <groupId>org.apache.avro</groupId>
+	  <artifactId>avro-maven-plugin</artifactId>
+	  <version>1.5.1</version>
+	  <executions>
+	    <execution>
+	      <id>schemas</id>
+	      <phase>generate-sources</phase>
+	      <goals>
+	        <goal>schema</goal>
+	        <goal>protocol</goal>
+	        <goal>idl-protocol</goal>
+	      </goals>
+	      <configuration>
+	        <excludes>
+	          <exclude>**/mapred/tether/**</exclude>
+	        </excludes>
+	        <sourceDirectory>${project.basedir}/src/main/avro/</sourceDirectory>
+	        <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+	        <testSourceDirectory>${project.basedir}/src/test/avro/</testSourceDirectory>
+	        <testOutputDirectory>${project.basedir}/src/test/java/</testOutputDirectory>
+	      </configuration>
+	    </execution>
+	  </executions>
+	</plugin>
     </plugins>
     <pluginManagement>
       <plugins>
@@ -143,6 +179,36 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-release-plugin</artifactId>
           <version>2.1</version>
+        </plugin>
+
+        <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+        <plugin>
+        	<groupId>org.eclipse.m2e</groupId>
+        	<artifactId>lifecycle-mapping</artifactId>
+        	<version>1.0.0</version>
+        	<configuration>
+        		<lifecycleMappingMetadata>
+        			<pluginExecutions>
+        				<pluginExecution>
+        					<pluginExecutionFilter>
+        						<groupId>org.apache.avro</groupId>
+        						<artifactId>
+        							avro-maven-plugin
+        						</artifactId>
+        						<versionRange>[1.5.1,)</versionRange>
+        						<goals>
+							        <goal>schema</goal>
+							        <goal>protocol</goal>
+							        <goal>idl-protocol</goal>
+        						</goals>
+        					</pluginExecutionFilter>
+        					<action>
+        						<execute></execute>
+        					</action>
+        				</pluginExecution>
+        			</pluginExecutions>
+        		</lifecycleMappingMetadata>
+        	</configuration>
         </plugin>
       </plugins>
     </pluginManagement>

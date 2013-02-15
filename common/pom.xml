@@ -17,6 +17,7 @@
       <groupId>org.codehaus.jackson</groupId>
       <artifactId>jackson-core-asl</artifactId>
     </dependency>
+
     <dependency>
       <groupId>org.codehaus.jackson</groupId>
       <artifactId>jackson-mapper-asl</artifactId>
@@ -26,6 +27,19 @@
       <groupId>commons-codec</groupId>
       <artifactId>commons-codec</artifactId>
     </dependency>
+
+	<dependency>
+	  <groupId>org.apache.avro</groupId>
+	  <artifactId>avro</artifactId>
+	  <version>1.5.1</version>
+	</dependency>
+
+	<dependency>
+	  <groupId>org.apache.avro</groupId>
+	  <artifactId>avro-ipc</artifactId>
+	  <version>1.5.1</version>
+	</dependency>
+
   </dependencies>
 
 </project>

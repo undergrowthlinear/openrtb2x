@@ -1,0 +1,61 @@
+{"namespace": "org.openrtb.common.api",
+ "protocol": "BlocklistAPI",
+ "version": "1.1",
+ "types": [
+     {"name": "Blocklist", "type": "record",
+      "fields": [
+        {"name": "publisherID", "type": ["string", "null"]},
+        {"name": "publisherName", "type": ["string", "null"]},
+        {"name": "sideID", "type": ["string", "null"]},
+        {"name": "siteName", "type": ["string", "null"]}
+      ]
+     },
+
+     {"name": "Identification", "type": "record",
+      "fields": [
+        {"name": "organization", "type": ["string", "null"]},
+        {"name": "timestamp", "type": ["long", "null"]},
+        {"name": "token", "type": ["string", "null"]}
+      ]
+     },
+     
+    {"name": "Status", "type": "record",
+      "fields": [
+        {"name": "requestToken", "type": ["string", "null"]},
+        {"name": "statusCode", "type": ["int", "null"]},
+        {"name": "statusMessage", "type": ["string", "null"]}
+      ]
+     },
+     
+    {"name": "Advertiser", "type": "record",
+      "fields": [
+        {"name": "landingPageTLD", "type": ["string", "null"]},
+        {"name": "name", "type": ["string", "null"]},
+        {"name": "timestamp", "type": ["long", "null"]},
+        {"name": "blocklist", "type": { "type": "array", "items": "Blocklist"} }
+      ]
+     },
+     
+    {"name": "BlocklistRequest", "type": "record",
+      "fields": [
+        {"name": "identification", "type": ["Identification", "null"]},
+        {"name": "advertisers", "type": { "type": "array", "items": "Advertiser"} }
+      ]
+    },
+    
+    {"name": "BlocklistResponse", "type": "record",
+      "fields": [
+        {"name": "identification", "type": ["Identification", "null"]},
+        {"name": "status", "type": ["Status", "null"]},
+        {"name": "advertisers", "type": { "type": "array", "items": "Advertiser"} }
+      ]
+    }      
+  ],
+ "messages": {
+     "send": {
+         "request": [{ "name": "blocklistReq", "type": "BlocklistRequest" }],
+         "response": "BlocklistResponse"
+     }
+  }
+ }
+ 
