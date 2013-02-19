@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2010, The OpenRTB Project
  * All rights reserved.
  *
@@ -31,13 +31,17 @@
  */
  
 package org.openrtb.dsp.core;
-import org.apache.avro.AvroRemoteException;
 
 /**
  * @author pshroff
  *
  */
-public class RTBMessageException extends AvroRemoteException {
+public class RTBMessageException extends Throwable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * 
