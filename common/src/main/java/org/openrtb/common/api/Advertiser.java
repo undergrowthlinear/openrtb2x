@@ -6,11 +6,11 @@
 package org.openrtb.common.api;  
 @SuppressWarnings("all")
 public class Advertiser extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = org.apache.avro.Schema.parse("{\"type\":\"record\",\"name\":\"Advertiser\",\"namespace\":\"org.openrtb.common.api\",\"fields\":[{\"name\":\"landingPageTLD\",\"type\":[\"string\",\"null\"]},{\"name\":\"name\",\"type\":[\"string\",\"null\"]},{\"name\":\"timestamp\",\"type\":[\"long\",\"null\"]},{\"name\":\"blocklist\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Blocklist\",\"fields\":[{\"name\":\"publisherID\",\"type\":[\"string\",\"null\"]},{\"name\":\"publisherName\",\"type\":[\"string\",\"null\"]},{\"name\":\"sideID\",\"type\":[\"string\",\"null\"]},{\"name\":\"siteName\",\"type\":[\"string\",\"null\"]}]}}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = org.apache.avro.Schema.parse("{\"type\":\"record\",\"name\":\"Advertiser\",\"namespace\":\"org.openrtb.common.api\",\"fields\":[{\"name\":\"landingPageTLD\",\"type\":[\"string\",\"null\"]},{\"name\":\"name\",\"type\":[\"string\",\"null\"]},{\"name\":\"timestamp\",\"type\":[\"long\",\"null\"]},{\"name\":\"blocklist\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"BlocklistObj\",\"fields\":[{\"name\":\"publisherID\",\"type\":[\"string\",\"null\"]},{\"name\":\"publisherName\",\"type\":[\"string\",\"null\"]},{\"name\":\"sideID\",\"type\":[\"string\",\"null\"]},{\"name\":\"siteName\",\"type\":[\"string\",\"null\"]}]}}}]}");
   public java.lang.CharSequence landingPageTLD;
   public java.lang.CharSequence name;
   public java.lang.Long timestamp;
-  public java.util.List<org.openrtb.common.api.Blocklist> blocklist;
+  public java.util.List<org.openrtb.common.api.BlocklistObj> blocklist;
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
   // Used by DatumWriter.  Applications should not call. 
   public java.lang.Object get(int field$) {
@@ -29,7 +29,7 @@ public class Advertiser extends org.apache.avro.specific.SpecificRecordBase impl
     case 0: landingPageTLD = (java.lang.CharSequence)value$; break;
     case 1: name = (java.lang.CharSequence)value$; break;
     case 2: timestamp = (java.lang.Long)value$; break;
-    case 3: blocklist = (java.util.List<org.openrtb.common.api.Blocklist>)value$; break;
+    case 3: blocklist = (java.util.List<org.openrtb.common.api.BlocklistObj>)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
