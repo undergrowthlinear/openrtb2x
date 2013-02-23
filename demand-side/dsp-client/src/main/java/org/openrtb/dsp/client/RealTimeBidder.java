@@ -38,25 +38,33 @@ import org.openrtb.common.api.BidResponse;
 import org.openrtb.common.api.OpenRTBAPI;
 
 import java.util.List;
-import java.util.ArrayList;
+import java.util.Map;
 
+import org.openrtb.dsp.intf.model.DSPConfig;
 import org.openrtb.dsp.intf.model.RTBAdvertiser;
+import org.openrtb.dsp.intf.model.RTBExchange;
+
 
 public class RealTimeBidder implements OpenRTBAPI {
-
-
 	List<RTBAdvertiser> advertisers;
-	
+	List<RTBExchange> exchangeServiceEndpoints;
 	
 	public RealTimeBidder(List<RTBAdvertiser> advertisers) {
-		if (advertisers != null && !advertisers.isEmpty())
-			this.advertisers = advertisers;
-		throw new IllegalArgumentException("List of advertisers cannot be empty. Check DSP Config.");
-	}
-
-	@Override
-	public BidResponse process(BidRequest request) throws AvroRemoteException {		
+		if (advertisers == null || advertisers.isEmpty())
+			throw new IllegalArgumentException("List of advertisers cannot be empty. Check DSP Config.");
 		
-		return null;
+		this.advertisers = advertisers;
+	}
+	
+	@Override
+	public BidResponse process(BidRequest request) throws AvroRemoteException {	
+		BidResponse response = null;
+		BidRequestTxn transaction = new BidRequestTxn(request, null, DSPConfig.theDSPConfig);
+		try {
+			response = transaction.exec();
+		} catch (RTBMessageException re) {
+			throw new AvroRemoteException(re.getMessage());
+		}
+		return response;		
 	}
 }

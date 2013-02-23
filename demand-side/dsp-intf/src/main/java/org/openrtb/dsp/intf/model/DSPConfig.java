@@ -29,25 +29,74 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
- 
-package org.openrtb.dsp.core;
+package org.openrtb.dsp.intf.model;
 
+import java.util.List;
+
+import org.mortbay.jetty.Connector;
+import org.openrtb.common.api.Advertiser;
 /**
- * @author pshroff
  *
  */
-public class RTBMessageException extends Throwable {
+public class DSPConfig {
+	public static DSPConfig theDSPConfig;
 
+	static String pathToConfigFile = ""; // TODO if no path is provided, initialize a default path name for config file
+	List<SupplySidePlatform> sspExchanges;
+	int defaultRequestTimerMs;
+	
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * 
-	 */
-	public RTBMessageException() {
+	public DSPConfig(String pathToConfigFile) {
 		// TODO Auto-generated constructor stub
+		if (pathToConfigFile == null || pathToConfigFile == "") 
+			throw new IllegalArgumentException("Illegal pathToConfigFile");
+		readConfig(pathToConfigFile);
 	}
 
+	// Config file is a JSON encoded file
+	void readConfig(String pathToConfigFile) {
+		// TODO read config here
+	}
+
+	/**
+	 * 
+	 */
+	public void LoadConfiguration() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * @return
+	 */
+	public java.util.List<Advertiser> getAdvertisers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * @return
+	 */
+	public java.util.List<SupplySidePlatform> getExchanges() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * @return
+	 */
+	public Connector getServerPort() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * @return
+	 */
+	public int getDefaultRequestTimerMs() {
+		return (defaultRequestTimerMs=120);
+	}
 }

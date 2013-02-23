@@ -29,67 +29,23 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.openrtb.dsp.core;
 
-import java.util.List;
+package org.openrtb.dsp.intf.model;
 
-import org.mortbay.jetty.Connector;
-import org.openrtb.common.api.Advertiser;
-import org.openrtb.dsp.intf.model.SupplySidePlatform;
+
 /**
- *
+ * @author pshroff
+ * Extends the batch mode SSP type for implementing RTB specific extensions
+ * such as {@link rtbServiceUrl}
  */
-public class DSPConfig {
+public class RTBExchange extends SupplySidePlatform {
 
-	static String pathToConfigFile = ""; // TODO if no path is provided, initialize a default path name for config file
-	List<SupplySidePlatform> sspList;
+	private String rtbServiceUrl;
 	
-	
-	/**
-	 * 
-	 */
-	public DSPConfig(String pathToConfigFile) {
-		// TODO Auto-generated constructor stub
-		if (pathToConfigFile == null || pathToConfigFile == "") 
-			throw new IllegalArgumentException("Illegal pathToConfigFile");
-		readConfig(pathToConfigFile);
+	public RTBExchange(String organization, String batchServiceUrl,
+			String rtbServiceUrl, String demandSideName, byte[] sharedSecret) {
+		super(organization, batchServiceUrl, demandSideName,
+				sharedSecret);
+		this.rtbServiceUrl = rtbServiceUrl;
 	}
-
-	// Config file is a JSON encoded file
-	void readConfig(String pathToConfigFile) {
-		// TODO read config here
-	}
-
-	/**
-	 * 
-	 */
-	public void LoadConfiguration() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/**
-	 * @return
-	 */
-	public java.util.List<Advertiser> getAdvertisers() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
-	 * @return
-	 */
-	public java.util.List<SupplySidePlatform> getExchanges() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
-	 * @return
-	 */
-	public Connector getServerPort() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 }

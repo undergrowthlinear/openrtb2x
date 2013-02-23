@@ -29,49 +29,31 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-
-package org.openrtb.dsp.intf.model;
-
-import java.util.Map;
-import java.util.List;
-
-import org.openrtb.common.api.Advertiser;
-
+ 
+package org.openrtb.dsp.client;
 
 /**
  * @author pshroff
- * This class implements a prototype Advertiser engaged in the real time bidding framework.
- * This particular prototype implementation shall inherit all properties of its "serializable" 
- * base class @link Advertiser 
+ *
  */
-public class RTBAdvertiser extends Advertiser {
+public class RTBMessageException extends Throwable {
 
-	// Seat ID assigned by each Exchange (key: dsp side name of exchange, value: seat ID)
-	private Map<String, String> seats;
-	
-	// List of Insertion Orders installed and active at this time 
-	private List<InsertionOrder> activeIOs;
-		
-	
-	/** @inherited: CharSequence landingPageTLD; */
-	/** @inherited: CharSequence name; */
-	/** @inherited: long timeStamp; */
-	/** @inherited: List<BlocklistObj> blocklist; */
-	
-	
-	public RTBAdvertiser() {
-		seats = null;
-		activeIOs = null;
-}
+	/**
+	 * 
+	 */
+    private static final long serialVersionUID = -2839199317706244721L;
+    private Throwable cause;
+    RTBMessageException() {
+        super();
+    }
 
+    RTBMessageException(String message) {
+        super(message);
+    }
 
-	public String getSeat(String exchangeName) {
-		return seats.get(exchangeName);
-	}
-
-
-	public void setSeat(String exchangeName, String seat) {
-		seats.put(exchangeName, seat);
-	}
+    RTBMessageException(String message, Throwable cause) {
+    	super(message);
+        this.cause = cause;
+    }
 
 }
