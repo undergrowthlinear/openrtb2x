@@ -38,8 +38,6 @@ import org.openrtb.common.api.BidResponse;
 import org.openrtb.common.api.OpenRTBAPI;
 
 import java.util.List;
-import java.util.Map;
-
 import org.openrtb.dsp.intf.model.DSPConfig;
 import org.openrtb.dsp.intf.model.RTBAdvertiser;
 import org.openrtb.dsp.intf.model.RTBExchange;

@@ -33,50 +33,35 @@ package org.openrtb.dsp.core;
 
 
 import java.io.IOException;
-import java.lang.Class;
-import java.util.List;
-import java.util.ArrayList;
 
-import org.openrtb.common.api.OpenRTBAPI;
-import org.openrtb.dsp.core.DSPConfig;
-import org.openrtb.dsp.intf.model.SupplySidePlatform;
-import org.openrtb.dsp.intf.model.RTBAdvertiser;
-import org.apache.avro.ipc.Responder;
-import org.apache.avro.ipc.reflect.ReflectResponder;
-import org.apache.avro.ipc.ResponderServlet;
 import org.apache.avro.ipc.HttpServer;
+import org.apache.avro.ipc.reflect.ReflectResponder;
+import org.openrtb.common.api.OpenRTBAPI;
+import org.openrtb.dsp.intf.model.DSPConfig;
 
- 
-
-/**
- *
- */
 public class DemandSidePlatform {
-	DSPConfig dspConfig;
 	OpenRTBAPI realtimeBidder;	
-	
+	// TODO: path to config file needs to be configurable in a UI or specified in a command line arg
+	DSPConfig dspConfig = DSPConfig.newConfig("/etc/files/dspconfig.json"); 
 	/**
 	 * 
 	 */
-	public DemandSidePlatform(DSPConfig config, OpenRTBAPI bidder) {
-		this.dspConfig = config;
+	public DemandSidePlatform(OpenRTBAPI bidder) {
+		if (bidder == null)
+			throw new IllegalArgumentException("Missing Bidder");
+
 		this.realtimeBidder = bidder;
 	}
 	
 	public void run() {		
 		try {
-			ReflectResponder dspResp = new ReflectResponder(Class.forName("org.openrtb.common.api.OpenRTBAPI"), realtimeBidder);
-			HttpServer dspServer =  null;
-			dspServer = new HttpServer(dspResp, dspConfig.getServerPort());
+			ReflectResponder dspResp = new ReflectResponder(OpenRTBAPI.PROTOCOL, realtimeBidder);
+			HttpServer dspServer =  new HttpServer(dspResp, dspConfig.getServerPort());
 			dspServer.start();
 			dspServer.join();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}	

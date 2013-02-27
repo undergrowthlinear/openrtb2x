@@ -33,8 +33,6 @@
 package org.openrtb.dsp.intf.model;
 
 import java.util.Map;
-import java.util.List;
-
 import org.openrtb.common.api.Advertiser;
 
 
@@ -48,10 +46,7 @@ public class RTBAdvertiser extends Advertiser {
 
 	// Seat ID assigned by each Exchange (key: dsp side name of exchange, value: seat ID)
 	private Map<String, String> seats;
-	
-	// List of Insertion Orders installed and active at this time 
-	private List<InsertionOrder> activeIOs;
-		
+			
 	
 	/** @inherited: CharSequence landingPageTLD; */
 	/** @inherited: CharSequence name; */
@@ -61,7 +56,6 @@ public class RTBAdvertiser extends Advertiser {
 	
 	public RTBAdvertiser() {
 		seats = null;
-		activeIOs = null;
 }
 
 

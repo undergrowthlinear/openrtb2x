@@ -195,7 +195,7 @@
         						<artifactId>
         							avro-maven-plugin
         						</artifactId>
-        						<versionRange>[1.5.1,)</versionRange>
+        						<versionRange>[1.7.3,)</versionRange>
         						<goals>
 							        <goal>schema</goal>
 							        <goal>protocol</goal>

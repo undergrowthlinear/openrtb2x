@@ -44,29 +44,27 @@ public class DSPConfig {
 	static String pathToConfigFile = ""; // TODO if no path is provided, initialize a default path name for config file
 	List<SupplySidePlatform> sspExchanges;
 	int defaultRequestTimerMs;
-	
-	
+		
 	/**
 	 * 
 	 */
 	public DSPConfig(String pathToConfigFile) {
-		// TODO Auto-generated constructor stub
-		if (pathToConfigFile == null || pathToConfigFile == "") 
-			throw new IllegalArgumentException("Illegal pathToConfigFile");
 		readConfig(pathToConfigFile);
 	}
 
+	public static DSPConfig newConfig(String pathToConfigFile) {
+		// TODO Auto-generated constructor stub
+		if (pathToConfigFile == null || pathToConfigFile == "") 
+			throw new IllegalArgumentException("Illegal pathToConfigFile");
+		DSPConfig.theDSPConfig = new DSPConfig(pathToConfigFile);
+		return DSPConfig.theDSPConfig;
+	}
+	
+	public static DSPConfig get() { return DSPConfig.theDSPConfig; }
+	
 	// Config file is a JSON encoded file
 	void readConfig(String pathToConfigFile) {
 		// TODO read config here
-	}
-
-	/**
-	 * 
-	 */
-	public void LoadConfiguration() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	/**
