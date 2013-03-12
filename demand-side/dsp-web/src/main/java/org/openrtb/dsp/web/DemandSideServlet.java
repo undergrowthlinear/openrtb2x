@@ -1,7 +1,6 @@
 package org.openrtb.dsp.web;
 
 import java.io.IOException;
-import java.lang.reflect.Constructor;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,9 +28,8 @@ public class DemandSideServlet extends HttpServlet {
 			daoObject = (DemandSideDAO)  Class.forName(classname).newInstance();
 			daoObject.loadData(daoDBlocation);	
 
-			classname = getServletContext().getInitParameter("RtbImplClassName");
-			Constructor<?> c = Class.forName(classname).getConstructor(daoObject.getClass());
-			bidder = (OpenRTBAPI) c.newInstance(daoObject);
+			classname = getServletContext().getInitParameter("BidderClassName");
+			bidder = (OpenRTBAPI) Class.forName(classname).newInstance();
 			/*	
 			classname = getServletContext().getInitParameter("BatchImplClassName");
 			if ((classname != null) || (classname != "")) {
