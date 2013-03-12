@@ -118,7 +118,7 @@ public class SignableTest {
                      MD5_VALIDATION, test.clearToken());
     }
 
-    private static class SignableTranslator extends AbstractJsonTranslator<SignableObject>{
+    private static class SignableTranslator extends AbstractJsonTranslator<Signable>{
         public SignableTranslator() { super(SignableTranslator.class); }
     }
 
@@ -131,7 +131,8 @@ public class SignableTest {
         @JsonProperty
         private String someValue;
 
-        private SignableObject() {}
+        @SuppressWarnings("unused")
+		private SignableObject() {}
 
         public SignableObject(Identification identification, String someValue) {
             this.identification = identification;
