@@ -3,19 +3,21 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>OpenRTB Demand Side Platform</display-name>
-
-  <context-param>
-    <param-name>contextConfigLocation</param-name>
-    <param-value>
-      classpath:/dsp-client.xml,
-      classpath:/dsp-core.xml,
-      classpath:/dsp-web.xml
-    </param-value>
-  </context-param>
-
-  <listener>
-    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-  </listener>
-
+  <display-name>Open RTB DSP</display-name>
+  <servlet>
+    <servlet-name>dsp</servlet-name>
+    <servlet-class>org.openrtb.dsp.web.DemandSideServlet</servlet-class>
+	<init-param>
+		<param-name>DAOClassName</param-name>
+		<param-value>org.openrtb.dsp.client.JsonFileBackedDAO</param-value>
+	</init-param>
+	<init-param>
+		<param-name>BidderClassName</param-name>
+		<param-value>org.openrtb.dsp.client.SimpleBidder</param-value>
+	</init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>dsp</servlet-name>
+    <url-pattern>/openrtb</url-pattern>
+  </servlet-mapping>
 </web-app>
