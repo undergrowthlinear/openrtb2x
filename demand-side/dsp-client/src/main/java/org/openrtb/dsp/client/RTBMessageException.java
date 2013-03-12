@@ -42,7 +42,6 @@ public class RTBMessageException extends Throwable {
 	 * 
 	 */
     private static final long serialVersionUID = -2839199317706244721L;
-    private Throwable cause;
     RTBMessageException() {
         super();
     }
@@ -53,7 +52,6 @@ public class RTBMessageException extends Throwable {
 
     RTBMessageException(String message, Throwable cause) {
     	super(message);
-        this.cause = cause;
     }
 
 }
