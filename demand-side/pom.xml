@@ -13,12 +13,6 @@
     <version>2.0.0</version>
   </parent>
 
-  <modules>
-    <module>dsp-intf</module>
-    <module>dsp-client</module>
-    <module>dsp-core</module>
-    <module>dsp-web</module>
-  </modules>
   
   <dependencies>
     <dependency>
@@ -27,4 +21,10 @@
       <version>${project.version}</version>
     </dependency>
   </dependencies>
+  <modules>
+  	<module>dsp-intf</module>
+  	<module>dsp-client</module>
+  	<module>dsp-core</module>
+  	<module>dsp-web</module>
+  </modules>
 </project>

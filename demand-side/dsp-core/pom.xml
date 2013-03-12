@@ -13,18 +13,7 @@
   </parent>
 
   <dependencies>
-    <dependency>
-      <groupId>org.openrtb.dsp</groupId>
-      <artifactId>dsp-intf</artifactId>
-      <version>${project.version}</version>
-    </dependency>
 
-    <dependency>
-      <groupId>org.openrtb.dsp</groupId>
-      <artifactId>dsp-client</artifactId>
-      <version>${project.version}</version>
-      <scope>test</scope>
-    </dependency>
 
     <dependency>
       <groupId>org.springframework</groupId>
@@ -39,6 +28,27 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>
+    </dependency>
+    <dependency>
+    	<groupId>org.openrtb.dsp</groupId>
+    	<artifactId>dsp-client</artifactId>
+    	<version>${project.version}</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+    	<groupId>org.openrtb.dsp</groupId>
+    	<artifactId>dsp-intf</artifactId>
+    	<version>${project.version}</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.apache.avro</groupId>
+    	<artifactId>avro-protobuf</artifactId>
+    	<version>1.7.4</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.apache.avro</groupId>
+    	<artifactId>avro-thrift</artifactId>
+    	<version>1.7.4</version>
     </dependency>
   </dependencies>
 </project>
