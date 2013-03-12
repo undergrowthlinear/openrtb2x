@@ -32,40 +32,116 @@
 
 package org.openrtb.dsp.intf.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import org.openrtb.common.api.Advertiser;
+
+import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.annotate.JsonPropertyOrder;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 
 
 /**
- * @author pshroff
  * This class implements a prototype Advertiser engaged in the real time bidding framework.
- * This particular prototype implementation shall inherit all properties of its "serializable" 
- * base class @link Advertiser 
  */
-public class RTBAdvertiser extends Advertiser {
+@JsonSerialize(include=Inclusion.NON_DEFAULT)
+@JsonPropertyOrder({"landingPage", "name", "nurl", "categories", "seats"})
+public class RTBAdvertiser {
 
-	// Seat ID assigned by each Exchange (key: dsp side name of exchange, value: seat ID)
-	private Map<String, String> seats;
-			
-	
-	/** @inherited: CharSequence landingPageTLD; */
-	/** @inherited: CharSequence name; */
-	/** @inherited: long timeStamp; */
-	/** @inherited: List<BlocklistObj> blocklist; */
-	
-	
-	public RTBAdvertiser() {
-		seats = null;
-}
+    @JsonProperty("landingPage")
+	public String landingPage;
+    
+    @JsonProperty("name")
+	public String name; 
 
+	// notification URL of the Advertiser to receive Win (or Loss) notifications directly from SSP
+    @JsonProperty("nurl")
+	public String nurl;
+	// List of categories this Advertiser belongs to
+    @JsonProperty("categories")
+	private List<String> categories = new ArrayList<String>();
+
+	// Seat ID assigned by each Exchange (key: SSPs orgname, value: seat ID)
+    @JsonProperty("seats")
+	private Map<String, String> seats = new HashMap<String, String>();
+	
+
+    public RTBAdvertiser(String lp, String name, String nurl, List<String> cats, Map<String, String> seats) {
+    	setLandingPage(lp);
+    	setName(name);
+    	setNurl(nurl);
+    	setCategories(cats);
+    	setSeats(seats);
+    }
+
+    @JsonProperty("landingPage")
+   public String getLandingPage() {
+		return this.landingPage;
+	}
+	
+    public void setLandingPage(String lp) {
+		
+	}
+   
+    @JsonProperty("name")
+   public String getName() {
+		return this.name;
+	}
+	
+    public void setName(String name) {
+		this.name = name;
+	}
+	
+    @JsonProperty("nurl")
+   public String getNurl() {
+		return this.nurl;
+	}
+
+    public void setNurl(String nurl) {
+		this.nurl = nurl;
+	}
+	
+    @JsonProperty("categories")
+	public List<String> getCategories() {
+		return categories;
+	}
+	
+	public void setCategories(List<String> cats) {
+		this.categories = cats;
+	}
+
+    @JsonProperty("seats")
+	public Map<String, String> getSeats() {
+		return seats;
+	}
+
+	public void setSeats(Map<String, String> seats) {
+		this.seats = seats;
+	}
+
+	
+	// additional helper methods
 
 	public String getSeat(String exchangeName) {
 		return seats.get(exchangeName);
 	}
 
 
-	public void setSeat(String exchangeName, String seat) {
+	public void addSeat(String exchangeName, String seat) {
 		seats.put(exchangeName, seat);
 	}
 
+
+	public void addCategories(List<String> categories) {
+		for (String cat : categories) {
+			this.categories.add(cat);
+		}
+	}
+
+	public void addCategory(String cat) {
+		this.categories.add(cat);
+	}
+	
 }

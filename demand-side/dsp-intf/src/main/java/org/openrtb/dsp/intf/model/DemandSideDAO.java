@@ -31,70 +31,17 @@
  */
 package org.openrtb.dsp.intf.model;
 
-import java.util.List;
+import java.util.concurrent.ConcurrentMap;
 
-import org.mortbay.jetty.Connector;
-import org.openrtb.common.api.Advertiser;
+
 /**
  *
  */
-public class DSPConfig {
-	public static DSPConfig theDSPConfig;
-
-	static String pathToConfigFile = ""; // TODO if no path is provided, initialize a default path name for config file
-	List<SupplySidePlatform> sspExchanges;
-	int defaultRequestTimerMs;
-		
-	/**
-	 * 
-	 */
-	public DSPConfig(String pathToConfigFile) {
-		readConfig(pathToConfigFile);
-	}
-
-	public static DSPConfig newConfig(String pathToConfigFile) {
-		// TODO Auto-generated constructor stub
-		if (pathToConfigFile == null || pathToConfigFile == "") 
-			throw new IllegalArgumentException("Illegal pathToConfigFile");
-		DSPConfig.theDSPConfig = new DSPConfig(pathToConfigFile);
-		return DSPConfig.theDSPConfig;
-	}
-	
-	public static DSPConfig get() { return DSPConfig.theDSPConfig; }
-	
-	// Config file is a JSON encoded file
-	void readConfig(String pathToConfigFile) {
-		// TODO read config here
-	}
-
-	/**
-	 * @return
-	 */
-	public java.util.List<Advertiser> getAdvertisers() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
-	 * @return
-	 */
-	public java.util.List<SupplySidePlatform> getExchanges() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
-	 * @return
-	 */
-	public Connector getServerPort() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
-	 * @return
-	 */
-	public int getDefaultRequestTimerMs() {
-		return (defaultRequestTimerMs=120);
-	}
+public interface DemandSideDAO {
+	public long getServerPort();
+	public long getDefaultTimeout(String string);
+	public ConcurrentMap<String, RTBExchange> getExchanges();
+	public ConcurrentMap<String, RTBAdvertiser> getAdvertisers();
+	public void loadData(String dbLocation) throws DSPException;
 }
+
