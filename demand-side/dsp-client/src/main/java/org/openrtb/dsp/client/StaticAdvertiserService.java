@@ -79,7 +79,6 @@ public class StaticAdvertiserService implements AdvertiserService {
         Set<String> publisher = new HashSet<String>();
         Set<String> site = new HashSet<String>();
         StringBuilder blocklistBuilder = new StringBuilder();
-        StringBuilder nameBuilder = new StringBuilder();
         for(Advertiser advertiser : advertisers) {
             blocklistBuilder.delete(0, blocklistBuilder.length());
             for(Blocklist blocklist : advertiser.getBlocklist()) {

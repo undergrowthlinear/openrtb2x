@@ -40,7 +40,6 @@ import org.apache.avro.AvroRemoteException;
 public class BlocklistException extends AvroRemoteException {
 
     private static final long serialVersionUID = -2839199317706244721L;
-    private Throwable cause;
     BlocklistException() {
         super();
     }
@@ -51,6 +50,5 @@ public class BlocklistException extends AvroRemoteException {
 
     BlocklistException(String message, Throwable cause) {
     	super(message);
-        this.cause = cause;
     }
 }

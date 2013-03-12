@@ -120,7 +120,6 @@ public class SupplySideServerTest {
     {
     	AdvertiserBlocklistRequestTranslator reqTrans = new AdvertiserBlocklistRequestTranslator();
     	AdvertiserBlocklistResponseTranslator resTrans = new AdvertiserBlocklistResponseTranslator();
-    	String digest;
     	
     	//set the request checksum
     	String jsonRequest = REQUEST.replaceAll("[ \n]", "");

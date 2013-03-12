@@ -33,8 +33,6 @@ package org.openrtb.ssp.core;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.List;
-
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.openrtb.common.json.AdvertiserBlocklistRequestTranslator;
