@@ -129,29 +129,9 @@
      {"name": "Content", "type": "record",
       "fields": [
         {"name": "id", "type": ["string", "null"]},
-        {"name": "name", "type": ["string", "null"]},
-        {"name": "domain", "type": ["string", "null"]},
-        {"name": "cat", "type": { "type": "array", "items": "string"} },
-        {"name": "sectioncat", "type": { "type": "array", "items": "string"} },
-        {"name": "pagecat", "type": { "type": "array", "items": "string"} },
-        {"name": "version", "type": ["string", "null"]},
-        {"name": "bundle", "type": ["string", "null"]},
-        {"name": "privacypolicy", "type": ["int", "null"]},
-        {"name": "paid", "type": ["int", "null"]},
-        {"name": "publisher", "type": ["Publisher", "null"]},
-        {"name": "content", "type": ["Content", "null"]},
-        {"name": "keywords", "type": ["string", "null"]},
-        {"name": "storeurl", "type": ["string", "null"]},
-        {"name": "ext", "type": ["string", "null"]}
-      ]
-     },
-
-     {"name": "App", "type": "record",
-      "fields": [
-        {"name": "id", "type": ["string", "null"]},
         {"name": "episode", "type": ["int", "null"]},
         {"name": "title", "type": ["string", "null"]},
-        {"name": "series", "type": ["Geo", "null"]},
+        {"name": "series", "type": ["string", "null"]},
         {"name": "season", "type": ["string", "null"]},
         {"name": "url", "type": ["string", "null"]},
         {"name": "cat", "type": { "type": "array", "items": "string"} },
@@ -167,6 +147,26 @@
         {"name": "qagmediarating", "type": ["int", "null"]},
         {"name": "embeddable", "type": ["int", "null"]},
         {"name": "language", "type": ["string", "null"]},
+        {"name": "ext", "type": ["string", "null"]}
+      ]
+     },
+
+     {"name": "App", "type": "record",
+      "fields": [
+        {"name": "id", "type": ["string", "null"]},
+        {"name": "name", "type": ["string", "null"]},
+        {"name": "domain", "type": ["string", "null"]},
+        {"name": "cat", "type": { "type": "array", "items": "string"} },
+        {"name": "sectioncat", "type": { "type": "array", "items": "string"} },
+        {"name": "pagecat", "type": { "type": "array", "items": "string"} },
+        {"name": "ver", "type": ["string", "null"]},
+        {"name": "bundle", "type": ["string", "null"]},
+        {"name": "privacypolicy", "type": ["int", "null"]},
+        {"name": "paid", "type": ["int", "null"]},
+        {"name": "publisher", "type": ["Publisher", "null"]},
+        {"name": "content", "type": ["Content", "null"]},
+        {"name": "keywords", "type": ["string", "null"]},
+        {"name": "storeurl", "type": ["string", "null"]},
         {"name": "ext", "type": ["string", "null"]}
       ]
      },
