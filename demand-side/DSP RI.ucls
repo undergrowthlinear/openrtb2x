@@ -48,7 +48,7 @@
   </class>  
   <class id="6" language="java" name="org.openrtb.dsp.intf.model.RTBExchange" project="dsp-intf" 
     file="/dsp-intf/src/main/java/org/openrtb/dsp/intf/model/RTBExchange.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="328" y="676"/>    
+    <position height="-1" width="-1" x="314" y="648"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
@@ -57,7 +57,7 @@
   </class>  
   <class id="7" language="java" name="org.openrtb.dsp.client.SimpleBidder" project="dsp-client" 
     file="/dsp-client/src/main/java/org/openrtb/dsp/client/SimpleBidder.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="658" y="595"/>    
+    <position height="-1" width="-1" x="702" y="501"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
@@ -102,7 +102,7 @@
   </class>  
   <class id="12" language="java" name="org.openrtb.dsp.client.StatefulBidder.TSMController" project="dsp-client" 
     file="/dsp-client/src/main/java/org/openrtb/dsp/client/StatefulBidder.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="736" y="940"/>    
+    <position height="-1" width="-1" x="777" y="948"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
@@ -111,7 +111,7 @@
   </class>  
   <enumeration id="13" language="java" name="org.openrtb.dsp.client.StatefulBidder.TSMStates" project="dsp-client" 
     file="/dsp-client/src/main/java/org/openrtb/dsp/client/StatefulBidder.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1090" y="910"/>    
+    <position height="-1" width="-1" x="1090" y="943"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
@@ -120,17 +120,17 @@
   </enumeration>  
   <class id="14" language="java" name="org.openrtb.dsp.client.StatefulBidder" project="dsp-client" 
     file="/dsp-client/src/main/java/org/openrtb/dsp/client/StatefulBidder.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="967" y="602"/>    
+    <position height="-1" width="-1" x="1061" y="495"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="false" package="false" protected="false" private="false"/>      
+      <attributes public="false" package="false" protected="false" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
   <class id="15" language="java" name="org.openrtb.dsp.intf.model.RTBRequestWrapper" project="dsp-intf" 
     file="/dsp-intf/src/main/java/org/openrtb/dsp/intf/model/RTBRequestWrapper.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="412" y="973"/>    
+    <position height="-1" width="-1" x="465" y="970"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
@@ -146,157 +146,174 @@
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <association id="17">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="18" name="advertisers"/>      
-      <multiplicity id="19" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="20">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="21" name="dspDAO"/>      
-      <multiplicity id="22" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="23">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="8"/>  
-  </realization>  
-  <nesting id="24">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="13"/>  
-  </nesting>  
-  <dependency id="25">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="13"/>  
-  </dependency>  
-  <association id="26">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="27" name="dsp"/>      
-      <multiplicity id="28" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="29">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="30" name="bidder"/>      
-      <multiplicity id="31" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="32">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="16"/>  
-  </dependency>  
-  <dependency id="33">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="5"/>  
-  </dependency>  
-  <dependency id="34">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="8"/>  
-  </dependency>  
-  <dependency id="35">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="10"/>  
-  </dependency>  
-  <dependency id="36">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="6"/>  
-  </dependency>  
-  <realization id="37">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="8"/>  
-  </realization>  
-  <association id="38">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="39" name="exchange"/>      
-      <multiplicity id="40" minimum="0" maximum="1"/>    
+  <interface id="17" language="java" name="org.openrtb.common.util.statemachines.FSMCallback" project="dsp-client" 
+    file="/Users/pshroff/.m2/repository/org/openrtb/common/2.0.0/common-2.0.0.jar" binary="true" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1332" y="782"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <association id="18">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="19" name="exchanges"/>      
+      <multiplicity id="20" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="41">    
+  <dependency id="21">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="16"/>  
   </dependency>  
-  <dependency id="42">    
+  <dependency id="22">    
     <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="16"/>  
+    <end type="TARGET" refId="6"/>  
   </dependency>  
-  <nesting id="43">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="12"/>  
-  </nesting>  
-  <association id="44">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="45" name="advertisers"/>      
-      <multiplicity id="46" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="47">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="10"/>  
-  </dependency>  
-  <association id="48">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="49" name="transactions"/>      
-      <multiplicity id="50" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="51">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="52" name="exchanges"/>      
-      <multiplicity id="53" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="54">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="55" name="daoObject"/>      
-      <multiplicity id="56" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="57">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="11"/>  
-  </dependency>  
-  <association id="58">    
+  <realization id="23">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="8"/>  
+  </realization>  
+  <association id="24">    
     <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="59" name="request"/>      
-      <multiplicity id="60" minimum="0" maximum="1"/>    
+      <attribute id="25" name="request"/>      
+      <multiplicity id="26" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="15" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="61">    
+  <association id="27">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="28" name="advertisers"/>      
+      <multiplicity id="29" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="30">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <association id="31">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="32" name="exchange"/>      
+      <multiplicity id="33" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="34">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="35" name="bidder"/>      
+      <multiplicity id="36" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="37">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="38" name="dspDAO"/>      
+      <multiplicity id="39" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="40">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="41" name="advertisers"/>      
+      <multiplicity id="42" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="43">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="13"/>  
+  </nesting>  
+  <association id="44">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="45" name="daoObject"/>      
+      <multiplicity id="46" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="47">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="8"/>  
+  </dependency>  
+  <dependency id="48">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <realization id="49">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="8"/>  
+  </realization>  
+  <association id="50">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="51" name="dsp"/>      
+      <multiplicity id="52" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="53">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="10"/>  
+  </dependency>  
+  <dependency id="54">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <nesting id="55">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="12"/>  
+  </nesting>  
+  <realization id="56">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="17"/>  
+  </realization>  
+  <dependency id="57">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="13"/>  
+  </dependency>  
+  <association id="58">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="59" name="transactions"/>      
+      <multiplicity id="60" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="61">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <realization id="62">    
     <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="3"/>  
   </realization>  
-  <association id="62">    
+  <association id="63">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="63" name="bidder"/>      
-      <multiplicity id="64" minimum="0" maximum="1"/>    
+      <attribute id="64" name="bidder"/>      
+      <multiplicity id="65" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="65">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="11"/>  
+  <dependency id="66">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="16"/>  
+  </dependency>  
+  <dependency id="67">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="10"/>  
+  </dependency>  
+  <dependency id="68">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="16"/>  
   </dependency>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     accessors="true" visibility="true">    
