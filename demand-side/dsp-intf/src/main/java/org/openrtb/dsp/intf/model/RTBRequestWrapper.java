@@ -33,15 +33,16 @@
 package org.openrtb.dsp.intf.model;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.openrtb.common.api.BidRequest;
 
 public class RTBRequestWrapper extends BidRequest {
+	BidRequest request;
 	RTBExchange  exchange;
 	final Map<String, RTBAdvertiser> advertisers = new HashMap<String, RTBAdvertiser>();	
 	long requestTimeoutMs;
 	long offerTimeoutMs;
-	BidRequest request;
 	private boolean isOfferTimerActive;
 	
 
@@ -67,14 +68,39 @@ public class RTBRequestWrapper extends BidRequest {
 	public BidRequest getRequest() {
 		return request;
 	}
-	
+
+	/** Builds a list of advertiser seat Ids that are allowed to bid on this request
+	 *
+	 * @param sspName
+	 * @return seats
+	 */
 	public Map<String, String> getUnblockedSeats(String sspName) {
 		Map<String, String> seats = new HashMap<String, String>();
-		for (Map.Entry<String, RTBAdvertiser> a : advertisers.entrySet()) {
+		boolean checkWseat = ((this.request.wseat != null) && (!this.request.wseat.isEmpty()));
+		for (Map.Entry<String, RTBAdvertiser> a : this.advertisers.entrySet()) {
+			// check if this is a private deal (checkWseat == true)
 			String seatID = a.getValue().getSeat(sspName);
-			if ((seatID != null) && !seatID.equals(wseat.toString())) {
-				seats.put(seatID, a.getValue().getLandingPage());
+			if (checkWseat && !this.request.wseat.contains(seatID)) {
+				break; // yes its a private deal, but this adv is not part of it
 			}
+			
+			// now check for blocked advertisers
+			for (CharSequence badv : this.request.badv) {
+				if (badv.equals(a.getKey())) {
+					break; // this advertiser is blocked for this request
+				}
+			}
+			
+			// now check for blocked categories
+			for (String acat : a.getValue().getCategories()) {
+				for (CharSequence bcat : this.request.bcat) {
+					if (!acat.equals(bcat.toString())) { 
+						break; // this advertiser belongs to a category that is blocked for this request
+					}
+				}
+			}
+			// if all tests pass, add seat as an allowed seat to return
+			seats.put(seatID, a.getValue().getLandingPage());
 		}
 		return seats;
 	}
