@@ -74,8 +74,12 @@ public class JsonFileBackedDAO implements DemandSideDAO {
 
 	@JsonSerialize(include=Inclusion.NON_DEFAULT)
 	@JsonPropertyOrder({"serverport", "requestTO", "offerTO", "exchanges", "advertisers"})	
-	class DSPProps {
-	    @JsonProperty("serverport")
+	static class DSPProps {
+	    public DSPProps() {
+			super();
+			// TODO Auto-generated constructor stub
+		}
+		@JsonProperty("serverport")
 		int dspServerPort;
 
 	    @JsonProperty("requestTO")
@@ -159,18 +163,16 @@ public class JsonFileBackedDAO implements DemandSideDAO {
 			} else {  // otherwise use a default location and filename relative to this class
 				this.dbLocation = getClass().getResource("dspConf.json").getFile();
 			}
-			mapper.enableDefaultTyping();
+			//mapper.enableDefaultTyping();
 			// read the properties as an object using ObjectMapper
 			DSPProps props = mapper.readValue(new File(this.dbLocation), DSPProps.class);
 			
 			this.properties.put("server_port", props.dspServerPort);
 			this.properties.put("request_timeout", props.defaultReqTimeout);
-			this.properties.put("offer_timeout", props.defaultOfferTimeout);
-			
+			this.properties.put("offer_timeout", props.defaultOfferTimeout);			
 			for (RTBExchange ex : props.exchanges) {
 				this.exchanges.put(ex.getOrgName(), ex);
 			}
-			
 			for (RTBAdvertiser adv : props.advertisers) {
 				this.advertisers.put(adv.getLandingPage(), adv);
 			}

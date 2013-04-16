@@ -33,7 +33,7 @@
 package org.openrtb.dsp.intf.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -50,7 +50,11 @@ import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 @JsonPropertyOrder({"landingPage", "name", "nurl", "categories", "seats"})
 public class RTBAdvertiser {
 
-    @JsonProperty("landingPage")
+    public RTBAdvertiser() {
+		super();
+	}
+
+	@JsonProperty("landingPage")
 	public String landingPage;
     
     @JsonProperty("name")
@@ -65,10 +69,10 @@ public class RTBAdvertiser {
 
 	// Seat ID assigned by each Exchange (key: SSPs orgname, value: seat ID)
     @JsonProperty("seats")
-	private Map<String, String> seats = new HashMap<String, String>();
+	private List<Map<String, String>> seats = new ArrayList<Map<String, String>> ();
 	
 
-    public RTBAdvertiser(String lp, String name, String nurl, List<String> cats, Map<String, String> seats) {
+	public RTBAdvertiser(String lp, String name, String nurl, List<String> cats,  List<Map<String, String>> seats) {
     	setLandingPage(lp);
     	setName(name);
     	setNurl(nurl);
@@ -80,9 +84,9 @@ public class RTBAdvertiser {
    public String getLandingPage() {
 		return this.landingPage;
 	}
-	
+ 
     public void setLandingPage(String lp) {
-		
+    	 this.landingPage = lp;
 	}
    
     @JsonProperty("name")
@@ -112,12 +116,12 @@ public class RTBAdvertiser {
 		this.categories = cats;
 	}
 
-    @JsonProperty("seats")
-	public Map<String, String> getSeats() {
+	  @JsonProperty("seats")
+	public List<Map<String, String>> getSeats() {
 		return seats;
 	}
 
-	public void setSeats(Map<String, String> seats) {
+	public void setSeats(List<Map<String, String>> seats) {
 		this.seats = seats;
 	}
 
@@ -125,14 +129,22 @@ public class RTBAdvertiser {
 	// additional helper methods
 
 	public String getSeat(String exchangeName) {
-		return seats.get(exchangeName);
+	    
+		Iterator<Map<String, String>>itr = seats.iterator();
+		String exchangeValue = null;
+		while(itr.hasNext())
+		{
+			Map<String, String> map = itr.next();
+			exchangeValue=map.get(exchangeName);	
+		}				
+		return exchangeValue;
 	}
 
 
-	public void addSeat(String exchangeName, String seat) {
-		seats.put(exchangeName, seat);
+	public void addSeat(List<Map<String, String>> seats) {
+	
+		seats.addAll(seats);
 	}
-
 
 	public void addCategories(List<String> categories) {
 		for (String cat : categories) {

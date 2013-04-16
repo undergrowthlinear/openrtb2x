@@ -35,10 +35,22 @@ package org.openrtb.dsp.intf.model;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.openrtb.common.api.App;
 import org.openrtb.common.api.BidRequest;
+import org.openrtb.common.api.Device;
+import org.openrtb.common.api.Impression;
+import org.openrtb.common.api.Site;
+import org.openrtb.common.api.User;
 
 public class RTBRequestWrapper extends BidRequest {
-	BidRequest request;
+	
+    public RTBRequestWrapper()
+    {
+        super();
+    }
+
+    BidRequest request;
 	RTBExchange  exchange;
 	final Map<String, RTBAdvertiser> advertisers = new HashMap<String, RTBAdvertiser>();	
 	long requestTimeoutMs;
@@ -47,11 +59,12 @@ public class RTBRequestWrapper extends BidRequest {
 	
 
 	public RTBRequestWrapper(BidRequest request) {
-		super();
+	    
+		super(request.getId(),request.getImp(),request.getSite(),request.getApp(),request.getDevice(),request.getUser(),request.getAt(),request.getTmax(),request.getWseat(),request.getAllimps(),request.getCur(),request.getBcat(),request.getBadv(),request.getExt());
 		this.request = request;
 	}
 	
-	public void setContext(RTBExchange exchange, Map<String, RTBAdvertiser> advertisers, 
+    public void setContext(RTBExchange exchange, Map<String, RTBAdvertiser> advertisers, 
 							long defaultRequestTO, long defaultOfferTO) {
 		this.exchange = new RTBExchange(exchange);
 		this.advertisers.clear();
@@ -83,9 +96,10 @@ public class RTBRequestWrapper extends BidRequest {
 			if (checkWseat && !this.request.wseat.contains(seatID)) {
 				break; // yes its a private deal, but this adv is not part of it
 			}
-			
+			    
 			// now check for blocked advertisers
-			for (CharSequence badv : this.request.badv) {
+			for (CharSequence badv : this.request.getBadv()) {
+			    
 				if (badv.equals(a.getKey())) {
 					break; // this advertiser is blocked for this request
 				}
@@ -93,7 +107,7 @@ public class RTBRequestWrapper extends BidRequest {
 			
 			// now check for blocked categories
 			for (String acat : a.getValue().getCategories()) {
-				for (CharSequence bcat : this.request.bcat) {
+				for (CharSequence bcat : this.request.getBcat()) {
 					if (!acat.equals(bcat.toString())) { 
 						break; // this advertiser belongs to a category that is blocked for this request
 					}
@@ -106,7 +120,7 @@ public class RTBRequestWrapper extends BidRequest {
 	}
 
 	public String getSSPName() {
-		if (exchange != null) {
+	    	if (exchange != null) {
 			return exchange.getOrgName();
 		}
 		return null;
