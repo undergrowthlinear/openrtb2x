@@ -34,6 +34,12 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+	<groupId>com.google.code.gson</groupId>
+	<artifactId>gson</artifactId>
+	<version>2.2.2</version>
+    </dependency>
+
+    <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-all</artifactId>
       <version>1.8.5</version>
@@ -59,14 +65,15 @@
       <dependency>
         <groupId>org.codehaus.jackson</groupId>
         <artifactId>jackson-core-asl</artifactId>
-        <version>1.6.0</version>
+        <version>1.9.7</version>
       </dependency>
       <dependency>
         <groupId>org.codehaus.jackson</groupId>
         <artifactId>jackson-mapper-asl</artifactId>
-        <version>1.6.0</version>
+        <version>1.9.7</version>
       </dependency>
 
+      
       <!-- common/standard utilities -->
       <dependency>
         <groupId>commons-codec</groupId>
@@ -153,7 +160,7 @@
 	  <artifactId>avro-maven-plugin</artifactId>
 	  <version>1.7.4</version>
 	  <executions>
-	    <execution>
+	  <!--  <execution>
 	      <id>schemas</id>
 	      <phase>generate-sources</phase>
 	      <goals>
@@ -172,6 +179,7 @@
 			<fieldVisibility>public</fieldVisibility>
 	      </configuration>
 	    </execution>
+	-->
 	  </executions>
 	</plugin>
     </plugins>
