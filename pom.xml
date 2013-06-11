@@ -160,7 +160,7 @@
 	  <artifactId>avro-maven-plugin</artifactId>
 	  <version>1.7.4</version>
 	  <executions>
-	  <!--  <execution>
+	    <execution>
 	      <id>schemas</id>
 	      <phase>generate-sources</phase>
 	      <goals>
@@ -179,7 +179,6 @@
 			<fieldVisibility>public</fieldVisibility>
 	      </configuration>
 	    </execution>
-	-->
 	  </executions>
 	</plugin>
     </plugins>
