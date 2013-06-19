@@ -29,7 +29,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package org.openrtb.dsp.client;
+package org.openrtb.dsp.core;
 
 import java.io.File;
 import java.util.List;
@@ -41,13 +41,10 @@ import org.codehaus.jackson.annotate.JsonPropertyOrder;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
-import org.openrtb.common.util.StringUtils;
 import org.openrtb.dsp.intf.model.DSPException;
 import org.openrtb.dsp.intf.model.DemandSideDAO;
 import org.openrtb.dsp.intf.model.RTBAdvertiser;
 import org.openrtb.dsp.intf.model.RTBExchange;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /* This class reads the initial DSP configuration from a JSON file named
  * "properties.json" found in the class path provided in its load(..) method
@@ -59,10 +56,9 @@ import org.slf4j.LoggerFactory;
  */
 
 
-public class JsonFileBackedDAO implements DemandSideDAO {	
+public class DemandSideDAODummyTest implements DemandSideDAO {	
 	private String dbLocation;
-	private final Logger logger = LoggerFactory.getLogger(JsonFileBackedDAO.class);
-
+	
 	private final ObjectMapper mapper = new ObjectMapper();
 	
 	// data
@@ -144,22 +140,20 @@ public class JsonFileBackedDAO implements DemandSideDAO {
 	}
 	
 	// the get method of ConcurrentMap is not blocking, hence make this synchronized
-	@Override
+	
 	public synchronized long getServerPort() {
 		return properties.get("server_port");
 	}
 
-	@Override
+	
 	public ConcurrentMap<String, RTBExchange> getExchanges() {
 		return exchanges;
 	}
 
-	@Override
 	public ConcurrentMap<String, RTBAdvertiser> getAdvertisers() {
 		return advertisers;
 	}
 
-	@Override
 	public synchronized void loadData(String dbLocation) throws DSPException {
 		try {			
 			if ((dbLocation != null) && (dbLocation != "")) {
@@ -182,12 +176,11 @@ public class JsonFileBackedDAO implements DemandSideDAO {
 			}
 			
 		} catch (Exception e) {
-			logger.error("JsonFileBackedDAO-Error in loading Configuration data : " + StringUtils.stackTraceToString(e));
 			throw new DSPException(e.getMessage());
 		}
 	}
 
-	@Override
+	
 	public synchronized long getDefaultTimeout(String string) {
 		return properties.get(string);
 	}	
