@@ -1,6 +1,6 @@
 package org.openrtb.dsp.client;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -13,18 +13,18 @@ import java.util.Map;
 import org.apache.avro.AvroRemoteException;
 import org.junit.Before;
 import org.junit.Test;
-import org.openrtb.common.api.App;
 import org.openrtb.common.api.Banner;
 import org.openrtb.common.api.BidRequest;
 import org.openrtb.common.api.BidResponse;
 import org.openrtb.common.api.Impression;
 import org.openrtb.common.api.Site;
 import org.openrtb.common.api.Video;
-import org.openrtb.dsp.client.StatefulBidder;
 import org.openrtb.dsp.intf.model.RTBAdvertiser;
 import org.openrtb.dsp.intf.model.RTBExchange;
 import org.openrtb.dsp.intf.model.RTBRequestWrapper;
-
+/**
+ * This class is used to test the functionality of FiniteStateMachine class with different States of a StatefulBidder class.
+ */
 public class FiniteStateMachineTest {
 	StatefulBidder bidder = new StatefulBidder();
 	BidRequest requestError = null;
@@ -33,7 +33,7 @@ public class FiniteStateMachineTest {
 	BidRequest offeredExpired = null;
 
 	@Before
-	public void setUpFormatError() throws Exception {
+	public void setUpFormatError() {
 		requestError = mock(BidRequest.class);
 		Banner banner = new Banner();
 		banner.setH(25);
@@ -54,19 +54,15 @@ public class FiniteStateMachineTest {
 		Site site = new Site();
 		site.setId("124545sfdghs");
 
-		App app = new App();
-		app.setId("appTest");
-		app.setBundle("com.mygame");
 		when(requestError.getImp()).thenReturn(
 				Collections.<Impression> singletonList(imp));
 		when(requestError.getSite()).thenReturn(site);
-		when(requestError.getApp()).thenReturn(app);
 		when(requestError.getWseat()).thenReturn(
 				Collections.<CharSequence> singletonList("012asfdfd25"));
 	}
 
 	@Before
-	public void setUpNoMatchingBid() throws Exception {
+	public void setUpNoMatchingBid() {
 		requestNoMatch = mock(BidRequest.class);
 		Banner banner = new Banner();
 		banner.setH(25);
@@ -86,18 +82,14 @@ public class FiniteStateMachineTest {
 		imp.setVideo(video);
 		Site site = new Site();
 		site.setId("124545sfdghs");
-		App app = new App();
-		app.setId("appTest");
-		app.setBundle("com.mygame");
 		when(requestNoMatch.getId()).thenReturn("adfa635656556");
 		when(requestNoMatch.getSite()).thenReturn(site);
-		when(requestNoMatch.getApp()).thenReturn(app);
 		when(requestNoMatch.getWseat()).thenReturn(
 				Collections.<CharSequence> singletonList("012asfdfd25"));
 	}
 
 	@Before
-	public void setUpRequestExpired() throws Exception {
+	public void setUpRequestExpired() {
 		requestExpired = mock(BidRequest.class);
 		Banner banner = new Banner();
 		banner.setH(25);
@@ -122,19 +114,15 @@ public class FiniteStateMachineTest {
 		}
 		Site site = new Site();
 		site.setId("124545sfdghs");
-		App app = new App();
-		app.setId("appTest");
-		app.setBundle("com.mygame");
 		when(requestExpired.getId()).thenReturn("adfa635656556");
 		when(requestExpired.getImp()).thenReturn(impList);
 		when(requestExpired.getSite()).thenReturn(site);
-		when(requestExpired.getApp()).thenReturn(app);
 		when(requestExpired.getWseat()).thenReturn(
 				Collections.<CharSequence> singletonList("012asfdfd25"));
 	}
 
 	@Before
-	public void setUpOfferedExpired() throws Exception {
+	public void setUpOfferedExpired() {
 		offeredExpired = mock(BidRequest.class);
 		Banner banner = new Banner();
 		banner.setH(25);
@@ -159,17 +147,15 @@ public class FiniteStateMachineTest {
 		}
 		Site site = new Site();
 		site.setId("124545sfdghs");
-		App app = new App();
-		app.setId("appTest");
-		app.setBundle("com.mygame");
 		when(offeredExpired.getId()).thenReturn("adfa635656556");
 		when(offeredExpired.getImp()).thenReturn(impList);
 		when(offeredExpired.getSite()).thenReturn(site);
-		when(offeredExpired.getApp()).thenReturn(app);
 		when(offeredExpired.getWseat()).thenReturn(
 				Collections.<CharSequence> singletonList("012asfdfd25"));
 	}
-
+	/**
+	 * This method test the format error state of StatefulBidder class
+	 */
 	@Test
 	public void testFormatError() throws AvroRemoteException {
 		RTBRequestWrapper wReq = new RTBRequestWrapper(requestError);
@@ -177,13 +163,11 @@ public class FiniteStateMachineTest {
 				"http://bigadex.com/rtb", "application/json");
 		List<String> categories = new ArrayList<String>();
 		categories.add("cat1");
-		List<Map<String, String>> seatList = new ArrayList<Map<String, String>>();
 		Map<String, String> seats = new HashMap<String, String>();
 		seats.put("BigAdExchange", "151");
 		seats.put("SmallAdExchange", "102");
-		seatList.add(seats);// add seats Map to List
 		RTBAdvertiser adv = new RTBAdvertiser("AdversiderPage", "BigIndia",
-				"http://bigbrand-adserver.com", categories, seatList);
+				"http://bigbrand-adserver.com", categories, seats);
 		Map<String, RTBAdvertiser> advertisers = new HashMap<String, RTBAdvertiser>();
 		advertisers.put(adv.getLandingPage(), adv);
 		long reqTimeout = 100;
@@ -192,7 +176,9 @@ public class FiniteStateMachineTest {
 		BidResponse response = bidder.process(wReq);
 		assertNull("Format Error but Response is not null", response);
 	}
-
+	/**
+	 * This method test the  NoMatchingBid state of StatefulBidder class
+	 */
 	@Test
 	public void testNoMatchingBid() throws AvroRemoteException {
 		RTBRequestWrapper wReq = new RTBRequestWrapper(requestNoMatch);
@@ -200,13 +186,12 @@ public class FiniteStateMachineTest {
 				"http://bigadex.com/rtb", "application/json");
 		List<String> categories = new ArrayList<String>();
 		categories.add("cat1");
-		List<Map<String, String>> seatList = new ArrayList<Map<String, String>>();
 		Map<String, String> seats = new HashMap<String, String>();
 		seats.put("BigAdExchange", "151");
 		seats.put("SmallAdExchange", "102");
-		seatList.add(seats);// add seats Map to List
+	
 		RTBAdvertiser adv = new RTBAdvertiser("AdversiderPage", "BigIndia",
-				"http://bigbrand-adserver.com", categories, seatList);
+				"http://bigbrand-adserver.com", categories, seats);
 		Map<String, RTBAdvertiser> advertisers = new HashMap<String, RTBAdvertiser>();
 		advertisers.put(adv.getLandingPage(), adv);
 		long reqTimeout = 100;
@@ -215,7 +200,10 @@ public class FiniteStateMachineTest {
 		BidResponse response = bidder.process(wReq);
 		assertNull("No matching bid found but Response is not null", response);
 	}
-
+	
+	/**
+	 * This method test the request expired state to expire in a valid time
+	 */
 	@Test
 	public void testRequestExpired() throws AvroRemoteException {
 		RTBRequestWrapper wReq = new RTBRequestWrapper(requestExpired);
@@ -223,13 +211,11 @@ public class FiniteStateMachineTest {
 				"http://bigadex.com/rtb", "application/json");
 		List<String> categories = new ArrayList<String>();
 		categories.add("cat1");
-		List<Map<String, String>> seatList = new ArrayList<Map<String, String>>();
 		Map<String, String> seats = new HashMap<String, String>();
 		seats.put("BigAdExchange", "151");
 		seats.put("SmallAdExchange", "102");
-		seatList.add(seats);// add seats Map to List
 		RTBAdvertiser adv = new RTBAdvertiser("AdversiderPage", "BigIndia",
-				"http://bigbrand-adserver.com", categories, seatList);
+				"http://bigbrand-adserver.com", categories, seats);
 		Map<String, RTBAdvertiser> advertisers = new HashMap<String, RTBAdvertiser>();
 		advertisers.put(adv.getLandingPage(), adv);
 		long reqTimeout = 10;
@@ -238,7 +224,10 @@ public class FiniteStateMachineTest {
 		BidResponse response = bidder.process(wReq);
 		//assertNull("Request Expired but Response is not null", response);
 	}
-
+	
+	/**
+	 * This method test the  offer expired state to expire in a valid time.
+	 */
 	//@Test
 	public void testOfferExpired() throws AvroRemoteException {
 		RTBRequestWrapper wReq = new RTBRequestWrapper(offeredExpired);
@@ -246,13 +235,11 @@ public class FiniteStateMachineTest {
 				"http://bigadex.com/rtb", "application/json");
 		List<String> categories = new ArrayList<String>();
 		categories.add("cat1");
-		List<Map<String, String>> seatList = new ArrayList<Map<String, String>>();
 		Map<String, String> seats = new HashMap<String, String>();
 		seats.put("BigAdExchange", "151");
 		seats.put("SmallAdExchange", "102");
-		seatList.add(seats);// add seats Map to List
 		RTBAdvertiser adv = new RTBAdvertiser("AdversiderPage", "BigIndia",
-				"http://bigbrand-adserver.com", categories, seatList);
+				"http://bigbrand-adserver.com", categories, seats);
 		Map<String, RTBAdvertiser> advertisers = new HashMap<String, RTBAdvertiser>();
 		advertisers.put(adv.getLandingPage(), adv);
 		long reqTimeout = 200;

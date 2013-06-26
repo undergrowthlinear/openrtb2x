@@ -2,6 +2,7 @@ package org.openrtb.dsp.client;
 
 import static org.junit.Assert.assertTrue;
 
+
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.concurrent.ConcurrentMap;
@@ -30,7 +31,9 @@ public class JsonFileBackedDAOTest
         dao = new JsonFileBackedDAO();
     }
 
-    // Validate Json configuration file present or not in the Project.
+    /**
+   	 * This method is used to Validate Json configuration file present or not in the Project.
+   	 */
     @Test
     public void fileNotFoundLoadData() throws DSPException
     {
@@ -53,7 +56,7 @@ public class JsonFileBackedDAOTest
     	URL url = null;
         try
         {
-            // create an incorect format file
+            // create an incorrect format file
             url = this.getClass().getResource(incorrectFormatProperties);
             dao.loadData(url.getPath());
         }
@@ -64,7 +67,9 @@ public class JsonFileBackedDAOTest
         }
     }
 
-    // Validate loadData() for Successful data Upload to the Configuration File.
+    /**
+	 * This method is used to test the loadData property for Successful data Upload to the Configuration File
+	 */
     @Test
     public void testLoadData() throws DSPException
     {
@@ -76,7 +81,9 @@ public class JsonFileBackedDAOTest
         assertTrue("expected size of exchange is", exchanges.size() == 1);
     }
 
-    // Validate loadData() method for Concurrency Test.
+    /**
+	 * This method test the Validate loadData property for Concurrency Test .
+	 */
     @Test
     public void concurrencyLoadDataTest() throws DSPException
     {
@@ -84,11 +91,11 @@ public class JsonFileBackedDAOTest
         dao.loadData(url.getPath());
         ConcurrencyTest concurrencyTest = new ConcurrencyTest();
         new Thread(concurrencyTest).start();
-
     }
 
-    // purpose of ConcurrencyTest Class to check Concurrency issues in load() of
-    // JsonFileBackedDAO.
+  /**
+   * purpose of ConcurrencyTest Class to check Concurrency issues in load() of JsonFileBackedDAO
+   **/
     class ConcurrencyTest implements Runnable
     {
         public void run()
