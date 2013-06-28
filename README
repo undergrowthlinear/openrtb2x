@@ -108,3 +108,9 @@ top-level directory.  The project is structured in the following manner:
 
       As a result of requirement (1) above, this package must be capable of 
       working in concert with the 'dsp-client' described above.
+
+
+  + openrtb-validator
+    This project provides a simple API that can be used to validate JSON bid
+    requests and responses according to OpenRTB specifications. OpenRTB
+    versions 1.0, 2.0, and 2.1 are fully supported.
