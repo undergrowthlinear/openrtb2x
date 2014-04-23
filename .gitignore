@@ -1,19 +1,13 @@
+# Eclipse/STS files #
+.settings/
+bin/
 *.DS_Store
 *.class
 *.prefs
 *.project
 *.classpath
-demand-side/dsp-client/target/*
-demand-side/dsp-intf/target/*
-demand-side/dsp-core/target/*
-demand-side/dsp-web/target/*
+*.springBeans
 
-supply-side/ssp-client/target/*
-supply-side/ssp-intf/target/*
-supply-side/ssp-core/target/*
-supply-side/ssp-web/target/*
-
-common/target/*
-
-
+# Maven build folders
+target/
 
