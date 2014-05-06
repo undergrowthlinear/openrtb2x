@@ -457,8 +457,8 @@
 					"$ref": "#/definitions/video_quality"
 				},
 				"keywords": {
-					
-				},
+                    "type": "string"
+                },
 				"contentrating": {
 					"type": "string"
 				},

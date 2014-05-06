@@ -100,11 +100,7 @@
             "cat":[
                 "IAB2-2"
             ],
-            "keywords":[
-                "keyword a",
-                "keyword b",
-                "keyword c"
-            ]
+            "keywords":"keyword a,keyword b,keyword c"
         }
     },
     "device":{

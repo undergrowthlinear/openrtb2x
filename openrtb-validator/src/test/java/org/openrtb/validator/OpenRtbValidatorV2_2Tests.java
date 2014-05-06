@@ -129,6 +129,7 @@ public class OpenRtbValidatorV2_2Tests {
     	// 6. "video.companionad.expandable" should be "video.companionad.expdir"
     	// 7. "site.privacypolicy" should be an integer
     	// 8. "site.content.keyword" should be "site.content.keywords"
+    	// 9. "site.content.keyword" should be a string
     	// 9. "site.content.season" should be a string
     	String invalidResource = "/v2_2/bid_requests/example4_video.json";
 		ProcessingReport invalidReport = validator.validate(JsonLoader.fromResource(invalidResource));
