@@ -11,3 +11,11 @@ bin/
 # Maven build folders
 target/
 
+#Ignore Idea generated files
+*.iws
+workspace.xml
+tasks.xml
+
+.idea
+*.iml
+
