@@ -17,6 +17,7 @@
     <module>common</module>
     <module>demand-side</module>
     <module>supply-side</module>
+    <module>openrtb-validator</module>
   </modules>
 
   <dependencies>
@@ -230,6 +231,7 @@
     </pluginManagement>
   </build>
 
+<licenses>
   <license>
     <name>New BSD License</name>
     <url>http://www.opensource.org/licenses/bsd-license.php</url>
