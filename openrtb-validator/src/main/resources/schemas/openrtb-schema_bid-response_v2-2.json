@@ -7,11 +7,11 @@
 	"additionalProperties": false,
 	"properties": {
 		"id": {
-		    "type": "string"
+			"type": "string"
 		},
 		"seatbid": {
-            "type": "array",
-		    "items": {
+			"type": "array",
+			"items": {
 				"$ref": "#/definitions/seatbid"
 			}
 		},
@@ -24,16 +24,16 @@
 		"customdata": {
 			"type": "string"
 		},
-        "nbr": {
-            "$ref": "#/definitions/nobid_reason"
-        },
+		"nbr": {
+			"$ref": "#/definitions/nobid_reason"
+		},
 		"ext": {
 			"type": "object"
 		}
 	},
-    "definitions": {
+	"definitions": {
 		"seatbid": {
-	        "type": "object",
+			"type": "object",
 			"required": [ "bid" ],
 			"additionalProperties": false,
 			"properties": {
@@ -55,61 +55,61 @@
 			}
 		},
 		"bid": {
-	        "type": "object",
+			"type": "object",
 			"required": [ "id", "impid", "price" ],
 			"additionalProperties": false,
 			"properties": {
 				"id": {
-				    "type": "string"
+					"type": "string"
 				},
 				"impid": {
-				    "type": "string"
+					"type": "string"
 				},
 				"price": {
-				    "type": "number",
-				    "minimum": 0
+					"type": "number",
+					"minimum": 0
 				},
 				"adid": {
-				    "type": "string"
+					"type": "string"
 				},
 				"nurl": {
-				    "type": "string"
+					"type": "string"
 				},
 				"adm": {
-				    "type": "string"
+					"type": "string"
 				},
 				"adomain": {
 					"type": "array",
 					"items": {
-					    "type": "string"
+						"type": "string"
 					}
 				},
 				"iurl": {
-				    "type": "string"
+					"type": "string"
 				},
 				"cid": {
-				    "type": "string"
+					"type": "string"
 				},
 				"crid": {
-				    "type": "string"
+					"type": "string"
 				},
 				"attr": {
 					"type": "array",
 					"items": {
-					    "$ref": "#/definitions/creative_attribute"
+						"$ref": "#/definitions/creative_attribute"
 					}
 				},
-                "dealid": {
-                    "type": "string"
-                },
-                "w": {
-                    "$ref": "#/definitions/positive_int"
-                },
-                "h": {
-                    "$ref": "#/definitions/positive_int"
-                },
+				"dealid": {
+					"type": "string"
+				},
+				"w": {
+					"$ref": "#/definitions/positive_int"
+				},
+				"h": {
+					"$ref": "#/definitions/positive_int"
+				},
 				"ext": {
-				    "type": "object"
+					"type": "object"
 				}
 			}
 		},
@@ -120,11 +120,11 @@
 			"minimum": 1,
 			"maximum": 16
 		},
-        "nobid_reason_code": {
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 8
-        },
+		"nobid_reason_code": {
+			"type": "integer",
+			"minimum": 0,
+			"maximum": 8
+		},
 
 		
 		"boolean_int": {
@@ -132,11 +132,15 @@
 			"minimum": 0,
 			"maximum": 1
 		},
+		"positive_int": {
+			"type": "integer",
+			"minimum": 0
+		},
 		"currency": {
-		    "type": "string",
-		    "minLength": 3,
-		    "maxLength": 3,
-		    "pattern": "[a-zA-Z]{3}"
+			"type": "string",
+			"minLength": 3,
+			"maxLength": 3,
+			"pattern": "[a-zA-Z]{3}"
 		}
 	}	
 }

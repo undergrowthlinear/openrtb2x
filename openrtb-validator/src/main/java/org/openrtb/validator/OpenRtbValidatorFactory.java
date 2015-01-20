@@ -85,7 +85,17 @@ public final class OpenRtbValidatorFactory {
 	 * An OpenRTB bid response v2.2 validator.
 	 */
 	private static final OpenRtbValidator BID_RESPONSE_V2_2 = new GenericOpenRtbValidator("/schemas/openrtb-schema_bid-response_v2-2.json");
-	
+
+	/**
+	 * An OpenRTB bid request v2.3 validator.
+	 */
+	private static final OpenRtbValidator BID_REQUEST_V2_3 = new GenericOpenRtbValidator("/schemas/openrtb-schema_bid-request_v2-3.json");
+
+	/**
+     * An OpenRTB bid response v2.3 validator.
+     */
+	private static final OpenRtbValidator BID_RESPONSE_V2_3 = new GenericOpenRtbValidator("/schemas/openrtb-schema_bid-response_v2-3.json");
+
 	/**
 	 * Returns an OpenRTB validator of a specific type and version.
 	 * 
@@ -111,6 +121,9 @@ public final class OpenRtbValidatorFactory {
 				break;
 			case V2_2:
 				validator = OpenRtbInputType.BID_REQUEST.equals(type) ? BID_REQUEST_V2_2 : BID_RESPONSE_V2_2;
+				break;
+			case V2_3:
+				validator = OpenRtbInputType.BID_REQUEST.equals(type) ? BID_REQUEST_V2_3 : BID_RESPONSE_V2_3;
 				break;
 			}
 		}
