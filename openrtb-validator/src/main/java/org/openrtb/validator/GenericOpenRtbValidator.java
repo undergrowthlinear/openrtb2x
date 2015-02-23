@@ -1,6 +1,6 @@
 /*
  * ============================================================================
- * Copyright (c) 2013, Nexage, Inc.
+ * Copyright (c) 2015, Millennial Media, Inc.
  * All rights reserved.
  * Provided under BSD License as follows:
  * 
@@ -12,9 +12,9 @@
  * 2.  Redistributions in binary form must reproduce the above copyright 
  *     notice, this list of conditions and the following disclaimer in the 
  *     documentation and/or other materials provided with the distribution.
- * 3.  Neither the name of Nexage, Inc. nor the names of its contributors may 
- *     be used to endorse or promote products derived from this software 
- *     without specific prior written permission.
+ * 3.  Neither the name of Millennial Media, Inc. nor the names of its
+ *     contributors may be used to endorse or promote products derived from this
+ *     software without specific prior written permission.
  * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
@@ -38,10 +38,10 @@ import java.io.Reader;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.fge.jackson.JsonLoader;
-import com.github.fge.jsonschema.exceptions.ProcessingException;
+import com.github.fge.jsonschema.core.exceptions.ProcessingException;
+import com.github.fge.jsonschema.core.report.ProcessingReport;
 import com.github.fge.jsonschema.main.JsonSchema;
 import com.github.fge.jsonschema.main.JsonSchemaFactory;
-import com.github.fge.jsonschema.report.ProcessingReport;
 
 /**
  * This class provides basic JSON validation against a schema.
@@ -50,68 +50,92 @@ public class GenericOpenRtbValidator implements OpenRtbValidator {
 
 	private final JsonSchema schema;
 	
-	/**
-	 * Constructs a JSON validator using the given schema read as a resource.
-	 * 
-	 * @param schemaResource the schema resource
-	 */
-	public GenericOpenRtbValidator(String schemaResource) {
+    /**
+     * Constructs a JSON validator using the given schema read as a resource.
+     * 
+     * @param schemaResource
+     *            the schema resource
+     */
+    GenericOpenRtbValidator(String schemaResource) {
 		try {
 			JsonSchemaFactory factory = JsonSchemaFactory.byDefault();
 			JsonNode jsonNode = JsonLoader.fromResource(schemaResource);
 			schema = factory.getJsonSchema(jsonNode);
-		} catch (IOException e) {
-			throw new IllegalStateException("could not initialize validator due to previous exception", e);
-		} catch (ProcessingException e) {
+		} catch (IOException | ProcessingException e) {
 			throw new IllegalStateException("could not initialize validator due to previous exception", e);
 		}
 	}
 	
 	@Override
-	public final boolean isValid(String json) throws IOException, ProcessingException {
-		ProcessingReport report = validate(json);
-		return report != null ? report.isSuccess() : false;
+	public final boolean isValid(String json) {
+	    try {
+            return validate(json).isValid();
+        } catch (IOException e) {
+            return false;
+        }
 	}
 	
 	@Override
-	public final boolean isValid(JsonNode jsonNode) throws ProcessingException {
-		ProcessingReport report = validate(jsonNode);
-		return report != null ? report.isSuccess() : false;
+	public final boolean isValid(JsonNode jsonNode) {
+        try {
+            return validate(jsonNode).isValid();
+        } catch (IOException e) {
+            return false;
+        }
 	}
 	
 	@Override
-	public final boolean isValid(File file) throws IOException, ProcessingException {
-		ProcessingReport report = validate(file);
-		return report != null ? report.isSuccess() : false;
+	public final boolean isValid(File file) {
+        try {
+            return validate(file).isValid();
+        } catch (IOException e) {
+            return false;
+        }
 	}
 	
 	@Override
-	public final boolean isValid(Reader reader) throws IOException, ProcessingException {
-		ProcessingReport report = validate(reader);
-		return report != null ? report.isSuccess() : false;
+	public final boolean isValid(Reader reader) {
+        try {
+            return validate(reader).isValid();
+        } catch (IOException e) {
+            return false;
+        }
 	}
 
 	@Override
-	public final ProcessingReport validate(String json) throws IOException, ProcessingException {
+	public final ValidationResult validate(String json) throws IOException {
 		JsonNode jsonNode = JsonLoader.fromString(json);
-		return schema.validate(jsonNode);
+		return getValidationResult(jsonNode);
 	}
 	
 	@Override
-	public final ProcessingReport validate(JsonNode jsonNode) throws ProcessingException {
-		return schema.validate(jsonNode);
+	public final ValidationResult validate(JsonNode jsonNode) throws IOException {
+        return getValidationResult(jsonNode);
 	}
 
 	@Override
-	public final ProcessingReport validate(File file) throws IOException, ProcessingException {
+	public final ValidationResult validate(File file) throws IOException {
 		JsonNode jsonNode = JsonLoader.fromFile(file);
-		return schema.validate(jsonNode);
+        return getValidationResult(jsonNode);
 	}
 	
 	@Override
-	public final ProcessingReport validate(Reader reader) throws IOException, ProcessingException {
+	public final ValidationResult validate(Reader reader) throws IOException {
 		JsonNode jsonNode = JsonLoader.fromReader(reader);
-		return schema.validate(jsonNode);
+        return getValidationResult(jsonNode);
+	}
+	
+	private final ValidationResult getValidationResult(JsonNode jsonNode) throws IOException {
+	    try {
+            ProcessingReport processingReport = schema.validate(jsonNode);
+            if (processingReport != null) {
+                return new ValidationResult(processingReport.isSuccess(), processingReport.toString());
+            } else {
+                return new ValidationResult(false, null);
+            }
+        } catch (ProcessingException e) {
+            throw new IOException(e.getMessage());
+        }
 	}
 
 }

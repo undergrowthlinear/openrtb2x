@@ -1,6 +1,6 @@
 /*
  * ============================================================================
- * Copyright (c) 2013, Nexage, Inc.
+ * Copyright (c) 2015, Millennial Media, Inc.
  * All rights reserved.
  * Provided under BSD License as follows:
  * 
@@ -12,9 +12,9 @@
  * 2.  Redistributions in binary form must reproduce the above copyright 
  *     notice, this list of conditions and the following disclaimer in the 
  *     documentation and/or other materials provided with the distribution.
- * 3.  Neither the name of Nexage, Inc. nor the names of its contributors may 
- *     be used to endorse or promote products derived from this software 
- *     without specific prior written permission.
+ * 3.  Neither the name of Millennial Media, Inc. nor the names of its
+ *     contributors may be used to endorse or promote products derived from this
+ *     software without specific prior written permission.
  * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
@@ -42,8 +42,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.fge.jackson.JsonLoader;
-import com.github.fge.jsonschema.exceptions.ProcessingException;
-import com.github.fge.jsonschema.report.ProcessingReport;
 
 /**
  * Test examples taken from OpenRTB v2.0 specification document. 
@@ -53,18 +51,18 @@ public class OpenRtbValidatorV2_0Tests {
 	private static final Logger logger = LoggerFactory.getLogger(OpenRtbValidatorV2_0Tests.class);
 	
     @Test
-    public void testBidRequestExample1SimpleBanner() throws IOException, ProcessingException {
+    public void testBidRequestExample1SimpleBanner() throws IOException {
     	OpenRtbValidator validator = OpenRtbValidatorFactory.getValidator(OpenRtbInputType.BID_REQUEST, OpenRtbVersion.V2_0);
 
 		String resource = "/v2_0/bid_requests/example1_simple_banner.json";
-		ProcessingReport report = validator.validate(JsonLoader.fromResource(resource));
+        ValidationResult result = validator.validate(JsonLoader.fromResource(resource));
 
-		logger.info("validation report: " + report);
-		assertTrue(resource + " is not valid", report.isSuccess());
+        logger.info("validation result: " + result);
+        assertTrue(resource + " is not valid", result.isValid());
     }
     
     @Test
-    public void testBidRequestExample2ExpandableCreative() throws IOException, ProcessingException {
+    public void testBidRequestExample2ExpandableCreative() throws IOException {
     	OpenRtbValidator validator = OpenRtbValidatorFactory.getValidator(OpenRtbInputType.BID_REQUEST, OpenRtbVersion.V2_0);
 
     	// NOTE: IABs example is invalid due to:
@@ -75,20 +73,20 @@ public class OpenRtbValidatorV2_0Tests {
     	// 5. "site.content.keyword" should be "site.content.keywords"
     	// 6. "site.content.keywords" should be a comma delimited string, not array of strings
 		String invalidResource = "/v2_0/bid_requests/example2_expandable_creative.json";
-		ProcessingReport invalidReport = validator.validate(JsonLoader.fromResource(invalidResource));
+        ValidationResult invalidResult = validator.validate(JsonLoader.fromResource(invalidResource));
 
-		logger.info("invalid validation report: " + invalidReport);
-		assertFalse(invalidResource + " is valid", invalidReport.isSuccess());
+        logger.info("invalid validation result: " + invalidResult);
+        assertFalse(invalidResource + " is valid", invalidResult.isValid());
 
 		String resource = "/v2_0/bid_requests/fixed/example2_expandable_creative.json";
-		ProcessingReport report = validator.validate(JsonLoader.fromResource(resource));
+        ValidationResult result = validator.validate(JsonLoader.fromResource(resource));
 
-		logger.info("validation report: " + report);
-		assertTrue(resource + " is not valid", report.isSuccess());
+        logger.info("validation result: " + result);
+        assertTrue(resource + " is not valid", result.isValid());
     }
 
     @Test
-    public void testBidRequestExample3Mobile() throws IOException, ProcessingException {
+    public void testBidRequestExample3Mobile() throws IOException {
     	OpenRtbValidator validator = OpenRtbValidatorFactory.getValidator(OpenRtbInputType.BID_REQUEST, OpenRtbVersion.V2_0);
 
 		// NOTE: IABs example is invalid due to:
@@ -96,20 +94,20 @@ public class OpenRtbValidatorV2_0Tests {
     	// 2. "app.content.keyword" should be "app.content.keywords"
     	// 3. "app.content.keywords" should be a comma delimited string, not array of strings
     	String invalidResource = "/v2_0/bid_requests/example3_mobile.json";
-		ProcessingReport invalidReport = validator.validate(JsonLoader.fromResource(invalidResource));
+        ValidationResult invalidResult = validator.validate(JsonLoader.fromResource(invalidResource));
 
-		logger.info("invalid validation report: " + invalidReport);
-		assertFalse(invalidResource + " is valid", invalidReport.isSuccess());
+        logger.info("invalid validation result: " + invalidResult);
+        assertFalse(invalidResource + " is valid", invalidResult.isValid());
 
     	String resource = "/v2_0/bid_requests/fixed/example3_mobile.json";
-		ProcessingReport report = validator.validate(JsonLoader.fromResource(resource));
+        ValidationResult result = validator.validate(JsonLoader.fromResource(resource));
 
-		logger.info("validation report: " + report);
-		assertTrue(resource + " is not valid", report.isSuccess());
+        logger.info("validation result: " + result);
+        assertTrue(resource + " is not valid", result.isValid());
     }
     
     @Test
-    public void testBidRequestExample4Video() throws IOException, ProcessingException {
+    public void testBidRequestExample4Video() throws IOException {
     	OpenRtbValidator validator = OpenRtbValidatorFactory.getValidator(OpenRtbInputType.BID_REQUEST, OpenRtbVersion.V2_0);
 
 		// NOTE: IABs example is invalid due to:
@@ -127,57 +125,57 @@ public class OpenRtbValidatorV2_0Tests {
     	// 12. "site.content.keywords" should be a comma delimited string, not array of strings
     	// 13. "site.content.season" should be a string, not an integer
     	String invalidResource = "/v2_0/bid_requests/example4_video.json";
-		ProcessingReport invalidReport = validator.validate(JsonLoader.fromResource(invalidResource));
+        ValidationResult invalidResult = validator.validate(JsonLoader.fromResource(invalidResource));
 
-		logger.info("invalid validation report: " + invalidReport);
-		assertFalse(invalidResource + " is valid", invalidReport.isSuccess());
+        logger.info("invalid validation result: " + invalidResult);
+        assertFalse(invalidResource + " is valid", invalidResult.isValid());
     	
     	String resource = "/v2_0/bid_requests/fixed/example4_video.json";
-		ProcessingReport report = validator.validate(JsonLoader.fromResource(resource));
+        ValidationResult result = validator.validate(JsonLoader.fromResource(resource));
 
-		logger.info("validation report: " + report);
-		assertTrue(resource + " is not valid", report.isSuccess());
+        logger.info("validation result: " + result);
+        assertTrue(resource + " is not valid", result.isValid());
     }
 
     @Test
-    public void testBidResponseExample1AdServedOnWinNotice() throws IOException, ProcessingException {
+    public void testBidResponseExample1AdServedOnWinNotice() throws IOException {
     	OpenRtbValidator validator = OpenRtbValidatorFactory.getValidator(OpenRtbInputType.BID_RESPONSE, OpenRtbVersion.V2_0);
     	
 		String resource = "/v2_0/bid_responses/example1_ad_served_on_win_notice.json";
-		ProcessingReport report = validator.validate(JsonLoader.fromResource(resource));
+        ValidationResult result = validator.validate(JsonLoader.fromResource(resource));
 
-		logger.info("validation report: " + report);
-		assertTrue(resource + " is not valid", report.isSuccess());
+        logger.info("validation result: " + result);
+        assertTrue(resource + " is not valid", result.isValid());
     }
     
     @Test
-    public void testBidResponseExample2VastUrlReturned() throws IOException, ProcessingException {
+    public void testBidResponseExample2VastUrlReturned() throws IOException {
     	OpenRtbValidator validator = OpenRtbValidatorFactory.getValidator(OpenRtbInputType.BID_RESPONSE, OpenRtbVersion.V2_0);
 
 		String resource = "/v2_0/bid_responses/example2_vast_url_returned.json";
-		ProcessingReport report = validator.validate(JsonLoader.fromResource(resource));
-		
-		logger.info("validation report: " + report);
-		assertTrue(resource + " is not valid", report.isSuccess());
+        ValidationResult result = validator.validate(JsonLoader.fromResource(resource));
+
+        logger.info("validation result: " + result);
+        assertTrue(resource + " is not valid", result.isValid());
     }
 
     @Test
-    public void testBidResponseExample3VastXmlDocumentReturnedInline() throws IOException, ProcessingException {
+    public void testBidResponseExample3VastXmlDocumentReturnedInline() throws IOException {
     	OpenRtbValidator validator = OpenRtbValidatorFactory.getValidator(OpenRtbInputType.BID_RESPONSE, OpenRtbVersion.V2_0);
 
 		// NOTE: IABs example is invalid due to:
     	// 1. "seatbid[0].bid.impid is required but missing
     	String invalidResource = "/v2_0/bid_responses/example3_vast_xml_document_returned_inline.json";
-		ProcessingReport invalidReport = validator.validate(JsonLoader.fromResource(invalidResource));
+        ValidationResult invalidResult = validator.validate(JsonLoader.fromResource(invalidResource));
 
-		logger.info("invalid validation report: " + invalidReport);
-		assertFalse(invalidResource + " is valid", invalidReport.isSuccess());
+        logger.info("invalid validation result: " + invalidResult);
+        assertFalse(invalidResource + " is valid", invalidResult.isValid());
     	
     	String resource = "/v2_0/bid_responses/fixed/example3_vast_xml_document_returned_inline.json";
-		ProcessingReport report = validator.validate(JsonLoader.fromResource(resource));
+        ValidationResult result = validator.validate(JsonLoader.fromResource(resource));
 
-		logger.info("validation report: " + report);
-		assertTrue(resource + " is not valid", report.isSuccess());
+        logger.info("validation result: " + result);
+        assertTrue(resource + " is not valid", result.isValid());
     }
 
 }

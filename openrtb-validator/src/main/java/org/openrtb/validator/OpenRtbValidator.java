@@ -1,6 +1,6 @@
 /*
  * ============================================================================
- * Copyright (c) 2013, Nexage, Inc.
+ * Copyright (c) 2015, Millennial Media, Inc.
  * All rights reserved.
  * Provided under BSD License as follows:
  * 
@@ -12,9 +12,9 @@
  * 2.  Redistributions in binary form must reproduce the above copyright 
  *     notice, this list of conditions and the following disclaimer in the 
  *     documentation and/or other materials provided with the distribution.
- * 3.  Neither the name of Nexage, Inc. nor the names of its contributors may 
- *     be used to endorse or promote products derived from this software 
- *     without specific prior written permission.
+ * 3.  Neither the name of Millennial Media, Inc. nor the names of its
+ *     contributors may be used to endorse or promote products derived from this
+ *     software without specific prior written permission.
  * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
@@ -37,112 +37,90 @@ import java.io.IOException;
 import java.io.Reader;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.github.fge.jsonschema.exceptions.ProcessingException;
-import com.github.fge.jsonschema.report.ProcessingReport;
 
 /**
  * This interface provides JSON validation methods.
  */
 public interface OpenRtbValidator {
 
-	/**
-	 * Validates a JSON string against a given specification
-	 * 
-	 * @param json
-	 *            the JSON as a string
-	 * @return true if JSON is valid
-	 * @throws IOException
-	 *             an error occurred while parsing JSON
-	 * @throws ProcessingException
-	 *             a processing error while validating JSON
-	 */
-	public boolean isValid(String json) throws IOException, ProcessingException;
+    /**
+     * Validates JSON against a given specification
+     * 
+     * @param json
+     *            the JSON as a string
+     * @return true if JSON is valid
+     */
+    public boolean isValid(String json);
 
-	/**
-	 * Validates a JSON against a given specification
-	 * 
-	 * @param jsonNode
-	 *            the JSON object
-	 * @return true if JSON is valid
-	 * @throws ProcessingException
-	 *             a processing error while validating JSON
-	 */
-	public boolean isValid(JsonNode jsonNode) throws ProcessingException;
+    /**
+     * Validates JSON against a given specification
+     * 
+     * @param jsonNode
+     *            the JSON object
+     * @return true if JSON is valid
+     */
+    public boolean isValid(JsonNode jsonNode);
 
-	/**
-	 * Validates a JSON against a given specification
-	 * 
-	 * @param file
-	 *            the JSON file
-	 * @return true if JSON is valid
-	 * @throws IOException
-	 *             an error occurred while reading or parsing JSON
-	 * @throws ProcessingException
-	 *             a processing error while validating JSON
-	 */
-	public boolean isValid(File file) throws IOException, ProcessingException;
+    /**
+     * Validates JSON against a given specification
+     * 
+     * @param file
+     *            the JSON file
+     * @return true if JSON is valid
+     */
+    public boolean isValid(File file);
 
-	/**
-	 * Validates a JSON against a given specification
-	 * 
-	 * @param reader
-	 *            the JSON reader
-	 * @return true if JSON is valid
-	 * @throws IOException
-	 *             an error occurred while reading or parsing JSON
-	 * @throws ProcessingException
-	 *             a processing error while validating JSON
-	 */
-	public boolean isValid(Reader reader) throws IOException, ProcessingException;
+    /**
+     * Validates JSON against a given specification
+     * 
+     * @param reader
+     *            the JSON reader
+     * @return true if JSON is valid
+     */
+    public boolean isValid(Reader reader);
 
-	/**
-	 * Validates a JSON string against a given specification
-	 * 
-	 * @param json
-	 *            the JSON as a string
-	 * @return a processesing report
-	 * @throws IOException
-	 *             an error occurred while parsing JSON
-	 * @throws ProcessingException
-	 *             a processing error while validating JSON
-	 */
-	public ProcessingReport validate(String json) throws IOException, ProcessingException;
+    /**
+     * Validates JSON against a given specification
+     * 
+     * @param json
+     *            the JSON as a string
+     * @return a validation result
+     * @throws IOException
+     *             an exception occurred while parsing or validating JSON
+     */
+    public ValidationResult validate(String json) throws IOException;
 
-	/**
-	 * Validates a JSON against a given specification
-	 * 
-	 * @param jsonNode
-	 *            the JSON object
-	 * @return a processesing report
-	 * @throws ProcessingException
-	 *             a processing error while validating JSON
-	 */
-	public ProcessingReport validate(JsonNode jsonNode) throws ProcessingException;
+    /**
+     * Validates JSON against a given specification
+     * 
+     * @param jsonNode
+     *            the JSON object
+     * @return a validation result
+     * @throws IOException
+     *             an exception occurred while parsing or validating JSON
+     */
+    public ValidationResult validate(JsonNode jsonNode) throws IOException;
 
-	/**
-	 * Validates a JSON against a given specification
-	 * 
-	 * @param file
-	 *            the JSON file
-	 * @return a processesing report
-	 * @throws IOException
-	 *             an error occurred while reading or parsing JSON
-	 * @throws ProcessingException
-	 *             a processing error while validating JSON
-	 */
-	public ProcessingReport validate(File file) throws IOException, ProcessingException;
+    /**
+     * Validates JSON against a given specification
+     * 
+     * @param file
+     *            the JSON file
+     * @return a validation result
+     * @throws IOException
+     *             an exception occurred while parsing or validating JSON
+     */
+    public ValidationResult validate(File file) throws IOException;
 
-	/**
-	 * Validates a JSON against a given specification
-	 * 
-	 * @param reader
-	 *            the JSON reader
-	 * @return a processesing report
-	 * @throws IOException
-	 *             an error occurred while reading or parsing JSON
-	 * @throws ProcessingException
-	 *             a processing error while validating JSON
-	 */
-	public ProcessingReport validate(Reader reader) throws IOException, ProcessingException;
+    /**
+     * Validates JSON against a given specification
+     * 
+     * @param reader
+     *            the JSON reader
+     * @return a validation result
+     * @throws IOException
+     *             an exception occurred while parsing or validating JSON
+     */
+    public ValidationResult validate(Reader reader) throws IOException;
 	
 }

@@ -1,6 +1,6 @@
 /*
  * ============================================================================
- * Copyright (c) 2013, Nexage, Inc.
+ * Copyright (c) 2015, Millennial Media, Inc.
  * All rights reserved.
  * Provided under BSD License as follows:
  * 
@@ -12,9 +12,9 @@
  * 2.  Redistributions in binary form must reproduce the above copyright 
  *     notice, this list of conditions and the following disclaimer in the 
  *     documentation and/or other materials provided with the distribution.
- * 3.  Neither the name of Nexage, Inc. nor the names of its contributors may 
- *     be used to endorse or promote products derived from this software 
- *     without specific prior written permission.
+ * 3.  Neither the name of Millennial Media, Inc. nor the names of its
+ *     contributors may be used to endorse or promote products derived from this
+ *     software without specific prior written permission.
  * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
@@ -36,7 +36,7 @@ import org.openrtb.validator.GenericOpenRtbValidator;
 import org.openrtb.validator.OpenRtbValidator;
 
 /**
- * This factory class provides access to validators for OpenRTB versions 1.0, 2.0, 2.1, and 2.2.
+ * This factory class provides access to validators for OpenRTB versions 1.0, 2.0, 2.1, 2.2, and 2.3.
  */
 public final class OpenRtbValidatorFactory {
 	
@@ -78,34 +78,38 @@ public final class OpenRtbValidatorFactory {
 
 	/**
 	 * An OpenRTB bid request v2.2 validator.
+     * @see <a href="http://www.iab.net/media/file/OpenRTBAPISpecificationVersion2_2.pdf">http://www.iab.net/media/file/OpenRTBAPISpecificationVersion2_2.pdf</a>
 	 */
 	private static final OpenRtbValidator BID_REQUEST_V2_2 = new GenericOpenRtbValidator("/schemas/openrtb-schema_bid-request_v2-2.json");
 
 	/**
 	 * An OpenRTB bid response v2.2 validator.
+     * @see <a href="http://www.iab.net/media/file/OpenRTBAPISpecificationVersion2_2.pdf">http://www.iab.net/media/file/OpenRTBAPISpecificationVersion2_2.pdf</a>
 	 */
 	private static final OpenRtbValidator BID_RESPONSE_V2_2 = new GenericOpenRtbValidator("/schemas/openrtb-schema_bid-response_v2-2.json");
 
 	/**
 	 * An OpenRTB bid request v2.3 validator.
+     * @see <a href="http://www.iab.net/media/file/OpenRTB-API-Specification-Version-2-3.pdf">http://www.iab.net/media/file/OpenRTB-API-Specification-Version-2-3.pdf</a>
 	 */
 	private static final OpenRtbValidator BID_REQUEST_V2_3 = new GenericOpenRtbValidator("/schemas/openrtb-schema_bid-request_v2-3.json");
 
 	/**
      * An OpenRTB bid response v2.3 validator.
+     * @see <a href="http://www.iab.net/media/file/OpenRTB-API-Specification-Version-2-3.pdf">http://www.iab.net/media/file/OpenRTB-API-Specification-Version-2-3.pdf</a>
      */
 	private static final OpenRtbValidator BID_RESPONSE_V2_3 = new GenericOpenRtbValidator("/schemas/openrtb-schema_bid-response_v2-3.json");
 
-	/**
-	 * Returns an OpenRTB validator of a specific type and version.
-	 * 
-	 * @param type
-	 *            the type
-	 * @param version
-	 *            the version
-	 * @return a specific OpenRTB validator or null if either type or version are null
-	 */
-	public static OpenRtbValidator getValidator(OpenRtbInputType type, OpenRtbVersion version) {
+    /**
+     * Returns an OpenRTB validator of a specific type and version.
+     * 
+     * @param type
+     *            the type
+     * @param version
+     *            the version
+     * @return a specific OpenRTB validator or null if either type or version are null
+     */
+    public static OpenRtbValidator getValidator(OpenRtbInputType type, OpenRtbVersion version) {
 		OpenRtbValidator validator = null;
 		
 		if (type != null && version != null) {

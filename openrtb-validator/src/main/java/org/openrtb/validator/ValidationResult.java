@@ -33,8 +33,51 @@
 package org.openrtb.validator;
 
 /**
- * This enumeration represents schema versions.
+ * This class provides validation result data.
  */
-public enum OpenRtbVersion {
-	V1_0, V2_0, V2_1, V2_2, V2_3
+public class ValidationResult {
+
+    private final boolean valid;
+    
+    private final String result;
+
+    /**
+     * Constructs an object containing JSON validation result data.
+     * 
+     * @param valid
+     *            validity status from validation
+     * @param result
+     *            the result data from validation
+     */
+    ValidationResult(boolean valid, String result) {
+        this.valid = valid;
+        this.result = result;
+    }
+
+    /**
+     * Returns the validity status from validation.
+     * 
+     * @return the validity status from validation
+     */
+    public boolean isValid() {
+        return valid;
+    }
+
+    /**
+     * Returns the result data from validation.
+     * 
+     * @return the result data from validation
+     */
+    public String getResult() {
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return (new StringBuilder())
+                .append("valid=").append(valid)
+                .append("result=").append(result)
+                .toString();
+    }
+    
 }

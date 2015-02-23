@@ -1,6 +1,6 @@
 /*
  * ============================================================================
- * Copyright (c) 2013, Nexage, Inc.
+ * Copyright (c) 2015, Millennial Media, Inc.
  * All rights reserved.
  * Provided under BSD License as follows:
  * 
@@ -12,9 +12,9 @@
  * 2.  Redistributions in binary form must reproduce the above copyright 
  *     notice, this list of conditions and the following disclaimer in the 
  *     documentation and/or other materials provided with the distribution.
- * 3.  Neither the name of Nexage, Inc. nor the names of its contributors may 
- *     be used to endorse or promote products derived from this software 
- *     without specific prior written permission.
+ * 3.  Neither the name of Millennial Media, Inc. nor the names of its
+ *     contributors may be used to endorse or promote products derived from this
+ *     software without specific prior written permission.
  * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
@@ -41,8 +41,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.fge.jackson.JsonLoader;
-import com.github.fge.jsonschema.exceptions.ProcessingException;
-import com.github.fge.jsonschema.report.ProcessingReport;
 
 /**
  * Test examples taken from OpenRTB v1.0 specification document. 
@@ -52,36 +50,36 @@ public class OpenRtbValidatorV1_0Tests {
 	private static final Logger logger = LoggerFactory.getLogger(OpenRtbValidatorV1_0Tests.class);
 	
     @Test
-    public void testBidRequestSite() throws IOException, ProcessingException {
+    public void testBidRequestSite() throws IOException {
 		OpenRtbValidator validator = OpenRtbValidatorFactory.getValidator(OpenRtbInputType.BID_REQUEST, OpenRtbVersion.V1_0);
 
 		String resource = "/v1_0/bid_requests/full_bid_request_site.json";
-		ProcessingReport report = validator.validate(JsonLoader.fromResource(resource));
+        ValidationResult result = validator.validate(JsonLoader.fromResource(resource));
 
-		logger.info("validation report: " + report);
-		assertTrue(resource + " is not valid", report.isSuccess());
+        logger.info("validation result: " + result);
+        assertTrue(resource + " is not valid", result.isValid());
     }
     
     @Test
-    public void testBidRequestApp() throws IOException, ProcessingException {
+    public void testBidRequestApp() throws IOException {
     	OpenRtbValidator validator = OpenRtbValidatorFactory.getValidator(OpenRtbInputType.BID_REQUEST, OpenRtbVersion.V1_0);
 
 		String resource = "/v1_0/bid_requests/full_bid_request_app.json";
-		ProcessingReport report = validator.validate(JsonLoader.fromResource(resource));
+        ValidationResult result = validator.validate(JsonLoader.fromResource(resource));
 
-		logger.info("validation report: " + report);
-		assertTrue(resource + " is not valid", report.isSuccess());
+        logger.info("validation result: " + result);
+        assertTrue(resource + " is not valid", result.isValid());
     }
     
     @Test
-    public void testBidResponse() throws IOException, ProcessingException {
+    public void testBidResponse() throws IOException {
     	OpenRtbValidator validator = OpenRtbValidatorFactory.getValidator(OpenRtbInputType.BID_RESPONSE, OpenRtbVersion.V1_0);
 
 		String resource = "/v1_0/bid_responses/full_bid_response.json";
-		ProcessingReport report = validator.validate(JsonLoader.fromResource(resource));
+        ValidationResult result = validator.validate(JsonLoader.fromResource(resource));
 
-		logger.info("validation report: " + report);
-		assertTrue(resource + " is not valid", report.isSuccess());
+        logger.info("validation result: " + result);
+        assertTrue(resource + " is not valid", result.isValid());
     }
 
 }
