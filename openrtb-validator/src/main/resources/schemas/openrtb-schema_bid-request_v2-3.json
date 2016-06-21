@@ -223,7 +223,7 @@
 		},
 		"video": {
 			"type": "object",
-			"required": [ "mimes", "minduration", "maxduration" ],
+			"required": [ "mimes" ],
 			"additionalProperties": false,
 			"properties": {
 				"mimes": {
