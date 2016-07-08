@@ -295,7 +295,7 @@
 					"$ref": "#/definitions/positive_int"
 				},
 				"sequence": {
-					"$ref": "#/definitions/positive_int"
+					"type": "integer"
 				},
 				"battr": {
 					"type": "array",
@@ -381,7 +381,7 @@
 					"$ref": "#/definitions/video_start_delay"
 				},
 				"sequence": {
-					"$ref": "#/definitions/positive_int"
+					"type": "integer"
 				},
 				"battr": {
 					"type": "array",
@@ -424,7 +424,7 @@
 					}
 				},
 				"maxseq": {
-					"type": "integer"
+					"$ref": "#/definitions/positive_int"
 				},
 				"feed": {
 					"$ref": "#/definitions/audio_feed_type"
@@ -434,9 +434,6 @@
 				},
 				"nvol": {
 					"$ref": "#/definitions/volume_normalization_mode"
-				},
-				"dl": {
-					"$ref": "#/definitions/boolean_int"
 				},
 				"ext": {
 					"type": "object"
@@ -864,10 +861,10 @@
 					"type": "integer"
 				},
 				"lastfix": {
-					"type": "integer"
+					"$ref": "#/definitions/positive_int"
 				},
 				"ipservice": {
-					"type": "integer"
+					"$ref": "#/definitions/ip_location_services"
 				},
 				"country": {
 					"type": "string",
@@ -1184,6 +1181,11 @@
 			"type": "integer",
 			"minimum": 1,
 			"maximum": 3
+		},
+		"ip_location_services": {
+			"type": "integer",
+			"minimum": 1,
+			"maximum": 4
 		},
 		"volume_normalization_mode": {
 			"type": "integer",
