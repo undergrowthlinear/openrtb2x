@@ -108,7 +108,7 @@ of working in concert with the 'dsp-client' described above.
 ### [openrtb-validator](https://github.com/openrtb/openrtb2x/tree/2.0/openrtb-validator)
 This project provides a simple API that can be used to validate
 JSON bid requests and responses according to OpenRTB specifications.
-OpenRTB versions 1.0, 2.0, 2.1, 2.2, and 2.3 are fully supported.
+OpenRTB versions 1.0, 2.0, 2.1, 2.2, 2.3 and 2.4 are fully supported.
 
 ### [native-validator](https://github.com/openrtb/openrtb2x/tree/2.0/native-validator)
 This project provides a simple API that can be used to validate
